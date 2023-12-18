@@ -26,7 +26,7 @@ class RegisterActivity : AppCompatActivity() {
         auth= FirebaseAuth.getInstance()
         val editTextEmail = findViewById<TextInputEditText>(R.id.email)
         val editTextPassword = findViewById<TextInputEditText>(R.id.password)
-        val editTextVerifyPassword = findViewById<TextView>(R.id.verifypassword)
+        val editTextVerifyPassword = findViewById<TextInputEditText>(R.id.verifypassword)
         val buttonReg = findViewById<Button>(R.id.reg)
         val textView = findViewById<TextView>(R.id.loginNow)
 
@@ -40,6 +40,7 @@ class RegisterActivity : AppCompatActivity() {
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
             val verifypassword = editTextVerifyPassword.text.toString()
+            val name =
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(this, "Enter Email", Toast.LENGTH_SHORT).show()
 
