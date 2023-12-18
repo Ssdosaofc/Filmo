@@ -20,8 +20,11 @@
             android:layout_marginRight="30dp"
             android:layout_width="60dp"
             android:layout_height="60dp"
-
+            android:foreground="@android:drawable/btn_star"
+            android:foregroundGravity="center"
             android:background="@drawable/favoritecolor" />
+
+
     </FrameLayout>
     <View
         android:id="@+id/myRectangleView"
