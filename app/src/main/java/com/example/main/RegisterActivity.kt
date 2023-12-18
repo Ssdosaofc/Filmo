@@ -1,4 +1,4 @@
-@file:Suppress("IMPLICIT_CAST_TO_ANY")
+
 
 package com.example.main
 
@@ -41,13 +41,12 @@ class RegisterActivity : AppCompatActivity() {
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
             val verifypassword = editTextVerifyPassword.text.toString()
-            val name =
-            if (email.isEmpty()) {
+            if (TextUtils.isEmpty(email)) {
                 Toast.makeText(this, "Enter Email", Toast.LENGTH_SHORT).show()
 
-            } else if (password.isEmpty()) {
+            } else if (TextUtils.isEmpty(password)) {
                 Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show()
-            } else if (verifypassword.isEmpty()) {
+            } else if (TextUtils.isEmpty(verifypassword)) {
                 Toast.makeText(this, "Verify Password", Toast.LENGTH_SHORT).show()
 
             } else if (verifypassword != password) {
@@ -56,13 +55,12 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-
-                        showToast("Account created")
+                        Toast.makeText(this, "Account created", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
-                        showToast("Authentication failed.")
+                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -71,9 +69,6 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-    }
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     public override fun onStart() {
