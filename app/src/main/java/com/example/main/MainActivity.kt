@@ -33,15 +33,15 @@ class MainActivity : AppCompatActivity() {
             finish()
         } else {
             textView.text = user.email
-            /*
+/*
             val fragmentManager: FragmentManager = supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
 
             val home = Home()
-            fragmentTransaction.replace(R.id.fragmenthome, home)
+            fragmentTransaction.replace(R.id.fragment_home, home)
             fragmentTransaction.commit()
+*/
 
-             */
         }
         button.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
