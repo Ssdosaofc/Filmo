@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -23,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         val editTextPassword = findViewById<TextInputEditText>(R.id.password)
         val buttonLog = findViewById<Button>(R.id.login)
         val textView = findViewById<TextView>(R.id.registerNow)
+
         textView.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)

@@ -19,7 +19,6 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -41,12 +40,12 @@ class RegisterActivity : AppCompatActivity() {
             val password = editTextPassword.text.toString()
             val verifypassword = editTextVerifyPassword.text.toString()
             val name =
-            if (TextUtils.isEmpty(email)) {
+            if (email.isEmpty()) {
                 Toast.makeText(this, "Enter Email", Toast.LENGTH_SHORT).show()
 
-            } else if (TextUtils.isEmpty(password)) {
+            } else if (password.isEmpty()) {
                 Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show()
-            } else if (TextUtils.isEmpty(verifypassword)) {
+            } else if (verifypassword.isEmpty()) {
                 Toast.makeText(this, "Verify Password", Toast.LENGTH_SHORT).show()
 
             } else if (verifypassword != password) {
@@ -55,23 +54,26 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(
-                            this, "Account created",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
+                        showToast("Account created")
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                        showToast("Authentication failed.")
                     }
                 }
             }
+
 
         }
 
 
     }
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
