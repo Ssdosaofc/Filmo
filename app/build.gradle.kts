@@ -47,4 +47,17 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    //Recyclerview
+    implementation ("androidx.recyclerview:recyclerview:1.1.0-alpha02")
+    implementation ("androidx.cardview:cardview:1.0.0")
+    // Gson
+    implementation ("com.google.code.gson:gson:2.8.5")
+
+    // Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.5.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.5.0")
+    implementation ("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
+
+    // Glide
+    implementation ("com.github.bumptech.glide:glide:4.8.0")
 }
