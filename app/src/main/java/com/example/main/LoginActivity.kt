@@ -21,7 +21,6 @@ class LoginActivity : AppCompatActivity() {
     var textView = findViewById<TextView>(R.id.registerNow)
     public override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
