@@ -15,14 +15,13 @@ import com.google.firebase.auth.FirebaseUser
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    var button: Button = findViewById(R.id.logout)
-    var textView: TextView = findViewById(R.id.userdetails)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
+        val button = findViewById<Button>(R.id.logout)
+        val textView = findViewById<TextView>(R.id.userdetails)
 
         auth= FirebaseAuth.getInstance()
         val user =auth.currentUser

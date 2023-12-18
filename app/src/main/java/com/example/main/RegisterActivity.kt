@@ -17,26 +17,18 @@ import com.google.firebase.auth.FirebaseAuth
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-    var editTextEmail = findViewById<TextInputEditText>(R.id.email)
-    var editTextPassword = findViewById<TextInputEditText>(R.id.password)
-    var editTextVerifyPassword = findViewById<TextView>(R.id.verifypassword)
-    var buttonReg = findViewById<Button>(R.id.reg)
 
-    var textView = findViewById<TextView>(R.id.loginNow)
-    public override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        if (currentUser != null){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         auth= FirebaseAuth.getInstance()
+        val editTextEmail = findViewById<TextInputEditText>(R.id.email)
+        val editTextPassword = findViewById<TextInputEditText>(R.id.password)
+        val editTextVerifyPassword = findViewById<TextView>(R.id.verifypassword)
+        val buttonReg = findViewById<Button>(R.id.reg)
+        val textView = findViewById<TextView>(R.id.loginNow)
 
         textView.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -78,5 +70,14 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
+    }
+    public override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }
