@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.main.R
 import com.example.main.Recycler.Recycler
+import com.example.main.Recycler.ViewAdapter
 
 class Home : Fragment() {
 
@@ -21,7 +23,47 @@ class Home : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+
+        imageId = arrayOf(
+
+        )
+
+        title = arrayOf(
+
+        )
+
+        description = arrayOf(
+
+        )
+
+
+        newRecyclerView = view.findViewById(R.id.popularlist)
+        val layoutManager = LinearLayoutManager(requireContext())
+        newRecyclerView.layoutManager = layoutManager
+
+        //newRecyclerView.layoutManager = LinearLayoutManager(this)
+        newRecyclerView.setHasFixedSize(true)
+
+        newArrayList = arrayListOf<Recycler>()
+        getUserdata()
+
+        return view
+
     }
+
+    private fun getUserdata() {
+        for (i in imageId.indices){
+            val movie = Recycler(imageId[i], title[i], description[i])
+            newArrayList.add(movie)
+        }
+
+        newRecyclerView.adapter = ViewAdapter(newArrayList)
+    }
+
+
+
+
 }
