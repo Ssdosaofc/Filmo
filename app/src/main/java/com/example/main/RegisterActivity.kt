@@ -27,7 +27,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null){
-            val intent = Intent(applicationContext, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -38,51 +38,44 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
         auth= FirebaseAuth.getInstance()
 
-        textView.setOnClickListener(View.OnClickListener {
-            val intent = Intent(applicationContext, LoginActivity::class.java)
+        textView.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-        })
+        }
 
-        buttonReg.setOnClickListener(View.OnClickListener {
-            val email = editTextEmail.toString()
-            val password = editTextPassword.toString()
+        buttonReg.setOnClickListener {
+            val email = editTextEmail.text.toString()
+            val password = editTextPassword.text.toString()
             val verifypassword = editTextVerifyPassword.text.toString()
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(this, "Enter Email", Toast.LENGTH_SHORT).show()
-                return@OnClickListener
-            }
-            if (TextUtils.isEmpty(password)) {
-                Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show()
-                return@OnClickListener
-            }
-            if (TextUtils.isEmpty(verifypassword)) {
-                Toast.makeText(this, "Verify Password", Toast.LENGTH_SHORT).show()
-                return@OnClickListener
-            }
-            if (verifypassword != password) {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
-                return@OnClickListener
-            }
-            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(OnCompleteListener {task->
-                if (task.isSuccessful) {
-                    Toast.makeText(
-                        this, "Account created",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(
-                        this, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
-        })
 
+            } else if (TextUtils.isEmpty(password)) {
+                Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show()
+            } else if (TextUtils.isEmpty(verifypassword)) {
+                Toast.makeText(this, "Verify Password", Toast.LENGTH_SHORT).show()
+
+            } else if (verifypassword != password) {
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+
+            } else {
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            this, "Account created",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+        }
 
 
     }

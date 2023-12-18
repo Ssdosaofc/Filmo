@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val user =auth.currentUser
 
         if (user == null) {
-            val intent = Intent(applicationContext, LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         } else {
@@ -40,13 +40,12 @@ class MainActivity : AppCompatActivity() {
             fragmentTransaction.replace(R.id.fragmenthome, home)
             fragmentTransaction.commit()
         }
-        button.setOnClickListener(View.OnClickListener {
+        button.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            val intent = Intent(applicationContext, LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
-        })
-
+        }
 
 
     }

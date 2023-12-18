@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val intent = Intent(applicationContext, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -32,42 +32,38 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        textView.setOnClickListener(View.OnClickListener {
-            val intent = Intent(applicationContext, RegisterActivity::class.java)
+        textView.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
             finish()
-        })
+        }
 
-        buttonLog.setOnClickListener(View.OnClickListener {
+        buttonLog.setOnClickListener {
             val email = editTextEmail.toString()
             val password = editTextPassword.toString()
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(this, "Enter Email", Toast.LENGTH_SHORT).show()
-                return@OnClickListener
-            }
-            if (TextUtils.isEmpty(password)) {
+            } else if (TextUtils.isEmpty(password)) {
                 Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show()
-                return@OnClickListener
-            }
-
-            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(
-                        this, "Login Successful",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT)
-                        .show()
+            } else {
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            this, "Login Successful",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
 
 
-
-        })
+        }
 
     }
 }
