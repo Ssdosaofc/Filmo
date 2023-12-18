@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.main.Fragments.Home
 import com.example.main.Login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
@@ -29,14 +32,14 @@ class MainActivity : AppCompatActivity() {
             finish()
         } else {
             textView.text = user.email
-/*
+
             val fragmentManager: FragmentManager = supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
 
             val home = Home()
-            fragmentTransaction.replace(R.id.fragment_home, home)
+            fragmentTransaction.replace(R.id.fragment, home)
             fragmentTransaction.commit()
-*/
+
 
         }
         button.setOnClickListener {
