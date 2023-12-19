@@ -25,7 +25,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favouriteList"
         android:layout_width="match_parent"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="97f"
         android:layout_height="match_parent" />
 
 </FrameLayout>
