@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val favButton = findViewById<Button>(R.id.Fav)
         val user =auth.currentUser
         val searchView = findViewById<SearchView>(R.id.searchbar)
-
+        searchView.clearFocus()
 
         if (user == null) {
             val intent = Intent(this, LoginActivity::class.java)
@@ -56,6 +56,8 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
+//https://youtube.com/watch?v=tQ7V7iBg5zE for search
+
         button.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this, LoginActivity::class.java)
@@ -66,3 +68,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
+
+
