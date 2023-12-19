@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.userdetails)
         val favButton = findViewById<Button>(R.id.Fav)
         val user =auth.currentUser
-        val fragmentManager: FragmentManager = supportFragmentManager
-        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
 
         if (user == null) {
             val intent = Intent(this, LoginActivity::class.java)
@@ -39,16 +37,19 @@ class MainActivity : AppCompatActivity() {
             textView.text = user.email
 
             val home = Home()
-            fragmentTransaction.replace(R.id.fragment, home)
-            fragmentTransaction.commit()
-
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment, home)
+                .commit()
 
         }
 
         favButton.setOnClickListener{
+            val newTransaction = supportFragmentManager.beginTransaction()
             val saved = Saved()
-            fragmentTransaction.replace(R.id.fragment, saved)
-            fragmentTransaction.commit()
+            newTransaction
+                .replace(R.id.fragment, saved)
+                .addToBackStack(null)
+                .commit()
         }
 
         button.setOnClickListener {
