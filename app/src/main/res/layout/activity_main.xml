@@ -14,17 +14,6 @@
         android:background="@drawable/rectangle"/>
 
 
-
-    <TextView
-        android:id="@+id/userdetails"
-        android:layout_width="258dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="18sp"
-        android:text="Hello World!"
-        android:textColor="@color/five"
-        android:textSize="12sp" />
-  
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
@@ -47,14 +36,38 @@
         android:foreground="@android:drawable/btn_star"
         android:foregroundGravity="center"
         android:text="@string/y"/>
-    
+
+    <TextView
+        android:id="@+id/userdetails"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="35sp"
+        android:text="Hello World!"
+        android:textColor="@color/five"
+        android:textSize="10sp" />
+    <TextView
+        android:id="@+id/appname"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="12sp"
+        android:textStyle="bold"
+        android:text="Filmopedia"
+        android:textColor="@color/five"
+        android:textSize="18sp" />
     <FrameLayout
         android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
+
     </FrameLayout>
 
-
-    
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:foreground="@android:drawable/ic_menu_search" />
 
 </com.google.android.material.bottomnavigation.BottomNavigationView>
