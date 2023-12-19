@@ -13,16 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <View
+        <Button
             android:id="@+id/Fav"
             android:layout_gravity="right"
             android:layout_marginTop="590dp"
             android:layout_marginRight="30dp"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="@drawable/favoritecolor"
             android:foreground="@android:drawable/btn_star"
-            android:foregroundGravity="center"
-            android:background="@drawable/favoritecolor" />
+            android:foregroundGravity="center"/>
 
 
     </FrameLayout>

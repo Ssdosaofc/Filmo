@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         auth= FirebaseAuth.getInstance()
         val button = findViewById<Button>(R.id.logout)
         val textView = findViewById<TextView>(R.id.userdetails)
-        val favButton = findViewById<View>(R.id.Fav)
+        val favButton = findViewById<Button>(R.id.Fav)
         val user =auth.currentUser
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
