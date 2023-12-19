@@ -44,9 +44,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         favButton.setOnClickListener{
-            val newTransaction = supportFragmentManager.beginTransaction()
             val saved = Saved()
-            newTransaction
+            supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment, saved)
                 .addToBackStack(null)
                 .commit()
