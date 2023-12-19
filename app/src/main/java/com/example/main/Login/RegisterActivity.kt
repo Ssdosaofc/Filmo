@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity() {
         val buttonReg = findViewById<Button>(R.id.reg)
         val textView = findViewById<TextView>(R.id.loginNow)
         db = FirebaseDatabase.getInstance()
-        root = db.getReference().child("Users")
+        root = db.reference.child("Users")
 
         textView.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
@@ -62,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
                         userMap["email"] = email
                         userMap["password"] = password
 
-                        root.setValue(userMap)
+                        root.push().setValue(userMap)
 
                         Toast.makeText(this, "Account created", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java)
