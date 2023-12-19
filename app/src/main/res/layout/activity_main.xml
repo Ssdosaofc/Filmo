@@ -24,37 +24,42 @@
         android:text="Hello World!"
         android:textColor="@color/five"
         android:textSize="12sp" />
-
+  
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="300sp"
+        android:layout_marginStart="310sp"
         android:layout_marginTop="1dp"
         android:background="@color/two"
         android:text="@string/logout"
         android:textColor="@color/five"
         android:textSize="12sp" />
-
+    
+    <Button
+        android:id="@+id/Fav"
+        android:layout_gravity="right"
+        android:layout_marginTop="640dp"
+        android:layout_marginRight="30dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/favoritecolor"
+        android:foreground="@android:drawable/btn_star"
+        android:foregroundGravity="center"
+        android:text="@string/y"/>
+    
     <FrameLayout
         android:id="@+id/fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <Button
-            android:id="@+id/Fav"
-            android:layout_gravity="right"
-            android:layout_marginTop="640dp"
-            android:layout_marginRight="30dp"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/favoritecolor"
-            android:foreground="@android:drawable/btn_star"
-            android:foregroundGravity="center"
-            android:text="@string/y"/>
+        
+
+        
 
 
     </FrameLayout>
 
+    
 
 </com.google.android.material.bottomnavigation.BottomNavigationView>

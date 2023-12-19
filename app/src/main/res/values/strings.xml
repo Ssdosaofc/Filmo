@@ -16,4 +16,5 @@
     <string name="email1">Email</string>
     <string name="name">Username</string>
     <string name="y">y</string>
+    <string name="favourites">Favourites</string>
 </resources>

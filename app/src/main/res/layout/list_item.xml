@@ -8,8 +8,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/movieimage"
-        android:layout_width="0.81in"
-        android:layout_height="1.20in"
+        android:layout_width="129.6dp"
+        android:layout_height="192dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"

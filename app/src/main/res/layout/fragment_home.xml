@@ -5,20 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="top"
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="52dp"
     tools:context=".Fragments.Home"
     >
 
 
-
-    <androidx.appcompat.widget.SearchView
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:hint="" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/popularlist"
-        android:layout_marginTop="43dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
