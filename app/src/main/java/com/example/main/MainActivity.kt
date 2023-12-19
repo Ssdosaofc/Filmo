@@ -49,13 +49,6 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragment, saved)
                 .addToBackStack(null)
                 .commit()
-
-            favButton.setOnClickListener{
-                val home = Home()
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment, home)
-                    .commit()
-            }
         }
 
         button.setOnClickListener {
