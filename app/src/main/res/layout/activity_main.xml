@@ -57,6 +57,7 @@
         android:textColor="@color/five"
         android:textSize="18sp" />
     <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchbar"
     android:layout_width="397dp"
     android:layout_height="47dp"
     android:layout_marginStart="10dp"

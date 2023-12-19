@@ -1,11 +1,14 @@
 package com.example.main
 
+//*<]:{)
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.main.Fragments.Home
@@ -28,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.userdetails)
         val favButton = findViewById<Button>(R.id.Fav)
         val user =auth.currentUser
+        val searchView = findViewById<SearchView>(R.id.searchbar)
+
 
         if (user == null) {
             val intent = Intent(this, LoginActivity::class.java)
