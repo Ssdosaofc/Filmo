@@ -48,12 +48,20 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        favButton.setOnClickListener{
-            val saved = Saved()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment, saved)
-                .addToBackStack(null)
-                .commit()
+        favButton.setOnClickListener {
+            val existingFragment = supportFragmentManager.findFragmentByTag(Saved::class.java.simpleName)
+
+            if (existingFragment == null) {
+                val saved = Saved()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment, saved, Saved::class.java.simpleName)
+                    .addToBackStack(null)
+                    .commit()
+            } else {
+                supportFragmentManager.beginTransaction()
+                    .show(existingFragment)
+                    .commit()
+            }
         }
 
 //https://youtube.com/watch?v=tQ7V7iBg5zE for search
