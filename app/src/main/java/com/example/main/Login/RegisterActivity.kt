@@ -5,7 +5,9 @@ package com.example.main.Login
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +33,7 @@ class RegisterActivity : AppCompatActivity() {
         val editTextVerifyPassword = findViewById<TextInputEditText>(R.id.verifypassword)
         val buttonReg = findViewById<Button>(R.id.reg)
         val textView = findViewById<TextView>(R.id.loginNow)
+        val progressBar = findViewById<ProgressBar>(R.id.progressbarR)
         //db = FirebaseDatabase.getInstance()
         //root = db.reference.child("Users")
 
@@ -41,6 +44,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         buttonReg.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
             val verifypassword = editTextVerifyPassword.text.toString()

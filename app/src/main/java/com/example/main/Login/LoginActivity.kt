@@ -1,12 +1,14 @@
 package com.example.main.Login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.main.MainActivity
 import com.example.main.R
 import com.google.android.material.textfield.TextInputEditText
@@ -25,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
         val editTextPassword = findViewById<TextInputEditText>(R.id.password)
         val buttonLog = findViewById<Button>(R.id.login)
         val textView = findViewById<TextView>(R.id.registerNow)
+        val progressBar = findViewById<ProgressBar>(R.id.progressbarL)
 
         textView.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
@@ -33,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         buttonLog.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
             if (TextUtils.isEmpty(email)) {
