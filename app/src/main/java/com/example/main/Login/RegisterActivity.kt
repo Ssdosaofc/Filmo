@@ -44,7 +44,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         buttonReg.setOnClickListener {
-            progressBar.visibility = View.VISIBLE
+
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
             val verifypassword = editTextVerifyPassword.text.toString()
@@ -60,6 +60,7 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
 
             } else {
+                progressBar.visibility = View.VISIBLE
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         /*

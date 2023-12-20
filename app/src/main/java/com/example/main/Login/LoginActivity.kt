@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         buttonLog.setOnClickListener {
-            progressBar.visibility = View.VISIBLE
+
             val email = editTextEmail.text.toString()
             val password = editTextPassword.text.toString()
             if (TextUtils.isEmpty(email)) {
@@ -44,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
             } else if (TextUtils.isEmpty(password)) {
                 Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show()
             } else {
+                progressBar.visibility = View.VISIBLE
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(

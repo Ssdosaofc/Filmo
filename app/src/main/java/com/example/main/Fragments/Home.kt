@@ -12,12 +12,14 @@ import com.example.main.Recycler.Recycler
 import com.example.main.Recycler.ViewAdapter
 
 class Home : Fragment() {
-
+/*
     private lateinit var newRecyclerView: RecyclerView
     private lateinit var newArrayList: ArrayList<Recycler>
     lateinit var imageId: Array<Int>
     lateinit var title: Array<String>
     lateinit var description: Array<String>
+
+ */
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +28,7 @@ class Home : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-
+/*
         imageId = arrayOf(
 
         )
@@ -49,11 +51,11 @@ class Home : Fragment() {
 
         newArrayList = arrayListOf<Recycler>()
         getUserdata()
-
+ */
         return view
 
     }
-
+/*
     private fun getUserdata() {
         for (i in imageId.indices){
             val movie = Recycler(imageId[i], title[i], description[i])
@@ -62,7 +64,7 @@ class Home : Fragment() {
 
         newRecyclerView.adapter = ViewAdapter(newArrayList)
     }
-
+ */
 
 
 
