@@ -39,7 +39,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/movieimage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/movieimage"
-        app:layout_constraintTop_toBottomOf="@+id/movietitle" />
+        app:layout_constraintTop_toBottomOf="@+id/movietitle"
+        android:ellipsize="end"/>
 
     <View
         android:id="@+id/view"
