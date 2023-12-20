@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Saved">
 
 
@@ -25,6 +26,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favouriteList"
         android:layout_width="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
         android:layout_marginTop="99dp"
         android:layout_height="match_parent" />
 

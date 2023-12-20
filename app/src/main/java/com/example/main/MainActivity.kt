@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             val saved = Saved()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment, saved)
-                .addToBackStack(null)
+                //.addToBackStack(null)
                 .commit()
         }
 
