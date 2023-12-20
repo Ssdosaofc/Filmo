@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -72,7 +73,36 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+/*
+        programmingLanguagesLV = findViewById(R.id.idLVProgrammingLanguages)
+        searchView = findViewById(R.id.idSV)
 
+        programmingLanguagesList = ArrayList()
+
+        listAdapter = ArrayAdapter<String>(
+            this,
+            android.R.layout.simple_list_item_1,
+            programmingLanguagesList
+        )
+
+        programmingLanguagesLV.adapter = listAdapter
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (programmingLanguagesList.contains(query)) {
+                    listAdapter.filter.filter(query)
+                } else {
+                    Toast.makeText(this@MainActivity, "No Movies Found..", Toast.LENGTH_LONG)
+                        .show()
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                listAdapter.filter.filter(newText)
+                return false
+            }
+        })
+*/
 
     }
 }

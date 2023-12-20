@@ -67,4 +67,8 @@ dependencies {
 
     // Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+    implementation ("io.reactivex.rxjava2:rxjava:2.2.7")
+    implementation ("com.jakewharton.rrelay2:rxrelay:2.0.0")
+    implementation ("io.reactivex.rxjava2:rxandroid:2.1.1")
 }
