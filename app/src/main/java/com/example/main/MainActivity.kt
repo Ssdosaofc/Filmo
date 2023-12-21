@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -15,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.main.Fragments.Home
 import com.example.main.Fragments.Saved
 import com.example.main.Login.LoginActivity
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         val textView = findViewById<TextView>(R.id.userdetails)
         val favButton = findViewById<Button>(R.id.Fav)
         val user =auth.currentUser
-        val searchView = findViewById<SearchView>(R.id.searchbar)
+        val searchView = findViewById<EditText>(R.id.searchbar)
         searchView.clearFocus()
 
         if (user == null) {

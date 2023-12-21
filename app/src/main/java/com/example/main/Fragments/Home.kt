@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.main.R
 import com.example.main.Recycler.ViewAdapter
 import com.example.main.api.Data
@@ -25,6 +27,7 @@ class Home : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+        getMovies()
         return view
 
     }
@@ -43,8 +46,10 @@ class Home : Fragment() {
                 if (data != null) {
                     Log.d("Filmopedia", data.toString())
                     adapter = ViewAdapter(requireContext(), data.results)
-                    
+                    view?.findViewById<RecyclerView>(R.id.popularlist)?.adapter = adapter
+                    view?.findViewById<RecyclerView>(R.id.popularlist)?.layoutManager = LinearLayoutManager(requireContext())
                 }
+
             }
 
             override fun onFailure(call: Call<Data>, t: Throwable) {
