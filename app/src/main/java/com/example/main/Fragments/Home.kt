@@ -7,22 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.main.R
+import com.example.main.Recycler.ViewAdapter
 import com.example.main.api.Data
-import com.example.main.api.MovieInterface
 import com.example.main.api.MovieService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class Home : Fragment() {
-    /*
-        private lateinit var newRecyclerView: RecyclerView
-        private lateinit var newArrayList: ArrayList<Recycler>
-        lateinit var imageId: Array<Int>
-        lateinit var title: Array<String>
-        lateinit var description: Array<String>
 
-     */
+    lateinit var adapter: ViewAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,52 +25,16 @@ class Home : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-
-
-        /*
-                imageId = arrayOf(
-
-                )
-
-                title = arrayOf(
-
-                )
-
-                description = arrayOf(
-
-                )
-
-
-                newRecyclerView = view.findViewById(R.id.popularlist)
-                val layoutManager = LinearLayoutManager(requireContext())
-                newRecyclerView.layoutManager = layoutManager
-
-                //newRecyclerView.layoutManager = LinearLayoutManager(this)
-                newRecyclerView.setHasFixedSize(true)
-
-                newArrayList = arrayListOf<Recycler>()
-                getUserdata()
-         */
         return view
 
     }
-
-    /*
-        private fun getUserdata() {
-            for (i in imageId.indices){
-                val movie = Recycler(imageId[i], title[i], description[i])
-                newArrayList.add(movie)
-            }
-
-            newRecyclerView.adapter = ViewAdapter(newArrayList)
-        }
-     */
+/*
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         getMovies()
     }
-
+*/
     private fun getMovies() {
         val film = MovieService.movieInterface.getMovies("en-US", 1)
         film.enqueue(object : Callback<Data> {
@@ -83,6 +42,8 @@ class Home : Fragment() {
                 val data = response.body()
                 if (data != null) {
                     Log.d("Filmopedia", data.toString())
+                    adapter = ViewAdapter(requireContext(), data.results)
+                    
                 }
             }
 
