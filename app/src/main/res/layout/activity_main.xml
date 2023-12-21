@@ -75,10 +75,10 @@
         android:layout_marginEnd="17dp"
         android:foreground="@drawable/baseline_search_24"/>
 
-    <androidx.fragment.app.FragmentContainerView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment"
-        android:name="com.example.main.Fragments.Home" />
+         />
 
 </com.google.android.material.bottomnavigation.BottomNavigationView>

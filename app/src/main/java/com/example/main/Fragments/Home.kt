@@ -5,12 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.main.MainActivity
 import com.example.main.R
-import com.example.main.Recycler.Recycler
-import com.example.main.Recycler.ViewAdapter
 
 class Home : Fragment() {
 /*
@@ -67,6 +62,10 @@ class Home : Fragment() {
         newRecyclerView.adapter = ViewAdapter(newArrayList)
     }
  */
+    override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+}
 
 
 
