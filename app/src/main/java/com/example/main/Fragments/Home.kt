@@ -31,13 +31,7 @@ class Home : Fragment() {
         return view
 
     }
-/*
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-        getMovies()
-    }
-*/
     private fun getMovies() {
         val film = MovieService.movieInterface.getMovies("en-US", 1)
         film.enqueue(object : Callback<Data> {
@@ -56,6 +50,8 @@ class Home : Fragment() {
                 Log.d("Filmopedia", "Error", t)
             }
         })
+
+
     }
 
 
