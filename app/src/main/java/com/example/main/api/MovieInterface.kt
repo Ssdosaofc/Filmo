@@ -10,6 +10,7 @@ import retrofit2.http.Query
 
 const val API_KEY = "51e881caaa8c24e018f35bd8fc72136a"
 const val BASE_URL= "https://api.themoviedb.org/3/"
+
 interface MovieInterface {
 
     @GET("movie/popular?api_key=$API_KEY")
