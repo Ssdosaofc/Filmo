@@ -61,14 +61,6 @@ class RegisterActivity : AppCompatActivity() {
                 progressBar.visibility = View.VISIBLE
                 auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        /*
-                        val userMap = HashMap<String, String>()
-                        userMap["email"] = email
-                        userMap["password"] = password
-
-                        root.push().setValue(userMap)
-
-                         */
 
                         Toast.makeText(this, "Account created", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity2::class.java)
