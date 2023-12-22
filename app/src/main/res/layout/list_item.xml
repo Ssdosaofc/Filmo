@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/movietitle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:maxLines="@integer/material_motion_duration_long_2"
         android:textSize="20sp"
         android:layout_marginStart="16dp"
@@ -33,7 +33,7 @@
     <TextView
         android:id="@+id/moviedetails"
         android:layout_width="0dp"
-        android:layout_height="140dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="32dp"
         android:textSize="15dp"
