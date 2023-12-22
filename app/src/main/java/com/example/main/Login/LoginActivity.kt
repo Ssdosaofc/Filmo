@@ -9,7 +9,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.main.MainActivity
+import com.example.main.MainActivity2
 import com.example.main.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
                             this, "Login Successful",
                             Toast.LENGTH_SHORT
                         ).show()
-                        val intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this, MainActivity2::class.java)
                         startActivity(intent)
                         finish()
                     } else {
@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
             finish()
         }
