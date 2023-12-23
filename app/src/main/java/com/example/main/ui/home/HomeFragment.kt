@@ -15,17 +15,20 @@ import com.example.main.Recycler.ViewAdapter
 import com.example.main.api.Data
 import com.example.main.api.MovieService
 import com.example.main.databinding.FragmentHomeBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.reflect.Member
 
 class HomeFragment : Fragment() {
     lateinit var adapter: ViewAdapter
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    //lateinit var member:QuestionMember
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -66,28 +69,4 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-/*
-    private fun getMovies() {
-        val film = MovieService.movieInterface.getMovies("en-US", 1)
-        film.enqueue(object : Callback<Data> {
-            override fun onResponse(call: Call<Data>, response: Response<Data>) {
-                val data = response.body()
-                if (data != null) {
-                    Log.d("Filmopedia", data.toString())
-                    adapter = ViewAdapter(requireContext(), data.results)
-                    view?.findViewById<RecyclerView>(R.id.popularlist)?.adapter = adapter
-                    view?.findViewById<RecyclerView>(R.id.popularlist)?.layoutManager = LinearLayoutManager(requireContext())
-                }
-
-            }
-
-            override fun onFailure(call: Call<Data>, t: Throwable) {
-                Log.d("Filmopedia", "Error", t)
-            }
-        })
-
-
-    }
-
- */
 }

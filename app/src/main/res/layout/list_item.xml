@@ -59,13 +59,16 @@
         android:background="@drawable/baseline_favorite_24_white"
         app:layout_constraintBottom_toBottomOf="@+id/movieimage"
         app:layout_constraintStart_toStartOf="@+id/movieimage"
+        android:visibility="invisible"
         />
-    <Button
+    <ImageButton
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/baseline_favorite_border_24"
+        android:src="@drawable/baseline_favorite_border_24"
         app:layout_constraintBottom_toBottomOf="@+id/movieimage"
         app:layout_constraintStart_toStartOf="@+id/movieimage"
+        android:background="@android:color/transparent"
+        android:id="@+id/favButton"
         />
 
 

@@ -7,7 +7,7 @@
     tools:context=".ui.dashboard.DashboardFragment"
     >
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,15 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:foreground="@drawable/baseline_search_24"
-        app:layout_constraintBottom_toBottomOf="@+id/search_bar"
-        app:layout_constraintEnd_toEndOf="@+id/search_bar"
-        app:layout_constraintTop_toTopOf="@id/search_bar"/>
-
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
