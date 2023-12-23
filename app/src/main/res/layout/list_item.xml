@@ -53,6 +53,21 @@
         app:layout_constraintTop_toBottomOf="@id/movieimage"
         tools:layout_editor_absoluteX="8dp" />
 
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/baseline_favorite_24_white"
+        app:layout_constraintBottom_toBottomOf="@+id/movieimage"
+        app:layout_constraintStart_toStartOf="@+id/movieimage"
+        />
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/baseline_favorite_border_24"
+        app:layout_constraintBottom_toBottomOf="@+id/movieimage"
+        app:layout_constraintStart_toStartOf="@+id/movieimage"
+        />
+
 
 
 
