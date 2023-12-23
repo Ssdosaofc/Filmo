@@ -1,7 +1,6 @@
 package com.example.main.Recycler
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.example.main.Login.LoginActivity
+import com.example.main.MainActivity2
 import com.example.main.R
 import com.example.main.api.Result
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -52,16 +50,17 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
         Glide.with(context).load(POSTER_BASE_URL + film.posterPath).into(holder.moviePoster)
 
         firebaseAuth = FirebaseAuth.getInstance()
-
+/*
         if (firebaseAuth.currentUser != null) {
             checkIfFavourite(holder, film.title, film.overview, film.posterPath)
         }
-    }
 
+ */
+    }
+/*
     private fun checkIfFavourite(holder: MovieViewHolder, title: String, overview: String, posterPath: String){
         val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
         val reference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
-
         reference.child(firebaseAuth.uid.toString()).child("Favourites")
             .child(title)
             .child(overview)
@@ -72,13 +71,21 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
                     if (isInMyFavourite){
                         holder.favButton.setImageResource(R.drawable.baseline_favorite_24_white)
                     }else{
-
+                        holder.favButton.setImageResource(R.drawable.baseline_favorite_border_24)
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {
 
                 }
             })
-    }
 
+        holder.favButton.setOnClickListener{
+            if (isInMyFavourite){
+                MainActivity2.removeFromFavourite(this,context, holder.movieTitle.toString(), holder.movieDescriptiom.toString(), holder.moviePoster)
+            }else{
+                MainActivity2.addToFavourite(this,context, holder.movieTitle.toString(), holder.movieDescriptiom.toString(), holder.moviePoster)
+            }
+        }
+    }
+ */
 }
