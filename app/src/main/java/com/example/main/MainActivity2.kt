@@ -77,18 +77,17 @@ class MainActivity2 : AppCompatActivity() {
         val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
         var timeStamp: Long = System.currentTimeMillis()
 
-        val hashMap: HashMap<String, Any> = HashMap<String, Any>()
+        val sanitizedDesc = sanitizeFirebasePath(overview)
+        val hashMap: HashMap<String, Any> = HashMap()
         hashMap["title"] = title
-        hashMap["overview"] = overview
+        hashMap["overview"] = sanitizedDesc
         hashMap["poster"] = poster.toString()
-
-        val sanitizedTitle = sanitizeFirebasePath(title)
 
         val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
-
+        val movieId = UUID.randomUUID().toString()
         ref.child(firebaseAuth.uid.toString()).child("Favourites")
-            .child(sanitizedTitle)
+            .child(movieId)
             .removeValue()
             .addOnSuccessListener {
                 Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show()
@@ -103,16 +102,17 @@ class MainActivity2 : AppCompatActivity() {
         val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
         var timeStamp: Long = System.currentTimeMillis()
 
+        val sanitizedDesc = sanitizeFirebasePath(overview)
         val hashMap: HashMap<String, Any> = HashMap()
         hashMap["title"] = title
-        hashMap["overview"] = overview
+        hashMap["overview"] = sanitizedDesc
         hashMap["poster"] = poster.toString()
 
-        val sanitizedTitle = sanitizeFirebasePath(title)
+        val movieId = UUID.randomUUID().toString()
         val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         ref.child(firebaseAuth.uid.toString()).child("Favourites")
-            .child(sanitizedTitle)
+            .child(movieId)
             .setValue(hashMap)
             .addOnSuccessListener {
                 Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
@@ -131,7 +131,7 @@ class MainActivity2 : AppCompatActivity() {
 
 
     }
-*/
+ */
 
 }
 

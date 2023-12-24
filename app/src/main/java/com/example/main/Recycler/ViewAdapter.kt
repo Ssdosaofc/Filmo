@@ -48,12 +48,13 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
         holder.movieDescriptiom.text = film.overview
 
         Glide.with(context).load(POSTER_BASE_URL + film.posterPath).into(holder.moviePoster)
-
-        firebaseAuth = FirebaseAuth.getInstance()
 /*
+        firebaseAuth = FirebaseAuth.getInstance()
+
         if (firebaseAuth.currentUser != null) {
             checkIfFavourite(holder, film.title, film.overview, film.posterPath)
         }
+
 
  */
     }
@@ -87,5 +88,7 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
             }
         }
     }
+
+
  */
 }

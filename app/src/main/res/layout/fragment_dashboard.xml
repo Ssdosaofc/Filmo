@@ -7,14 +7,26 @@
     tools:context=".ui.dashboard.DashboardFragment"
     >
 
-    <androidx.appcompat.widget.SearchView
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="   Search for Movies"
-        app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:foreground="@drawable/baseline_filter_alt_24"
+        android:foregroundGravity="center"
+        android:foregroundTint="@color/five"
+        android:layout_margin="20sp"
+        android:background="@drawable/favoritecolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchList"
@@ -24,6 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@+id/search_bar"
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/list_item" />
