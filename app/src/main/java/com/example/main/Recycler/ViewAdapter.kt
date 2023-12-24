@@ -59,7 +59,7 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
 
  */
     }
-
+/*
     private fun checkIfFavourite(holder: MovieViewHolder, title: String, overview: String, poster: String){
         val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
         val reference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
@@ -138,6 +138,5 @@ fun addToFavourite(context: Context, title: String, overview: String, poster: Im
         .addOnFailureListener {
             Toast.makeText(context, "Could not Add to Favourites", Toast.LENGTH_SHORT).show()
         }
-
-
+ */
 }

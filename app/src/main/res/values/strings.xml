@@ -20,8 +20,8 @@
     <string name="api_key">paste your api key here</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Search</string>
+    <string name="title_notifications">Favourites</string>
     <string name="search">Search</string>
     <string name="favourite">Favourites</string>
 

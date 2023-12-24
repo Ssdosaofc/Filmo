@@ -57,9 +57,6 @@ class MainActivity2 : AppCompatActivity() {
             textView.text = user.email
         }
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
 
         button.setOnClickListener {
             FirebaseAuth.getInstance().signOut()

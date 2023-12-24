@@ -27,8 +27,6 @@ import retrofit2.Response
 
 class DashboardFragment : Fragment() {
 
-    lateinit var adapter: ViewAdapter
-
     private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and
@@ -49,6 +47,7 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
         }
+
         return root
     }
 /*
@@ -92,9 +91,8 @@ class DashboardFragment : Fragment() {
 
         })
     }
+*/
 
-
- */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
