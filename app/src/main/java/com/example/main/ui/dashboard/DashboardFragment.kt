@@ -29,8 +29,6 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -50,48 +48,6 @@ class DashboardFragment : Fragment() {
 
         return root
     }
-/*
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-
-        inflater.inflate(R.menu.menu_search, menu)
-
-        val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.actionView as SearchView
-
-        val searchList: RecyclerView = binding.searchList
-
-        searchView.setOnQueryTextListener(object : OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query!=null){
-                    val film = SearchService.searchInterface.getMovies(query,false,"en-US", 1)
-                    film.enqueue(object : Callback<Data> {
-                        override fun onResponse(call: Call<Data>, response: Response<Data>) {
-                            val data = response.body()
-                            if (data != null) {
-                                Log.d("Filmopedia", data.toString())
-                                adapter = ViewAdapter(requireContext(), data.results)
-                                searchList.adapter = adapter
-                                searchList.layoutManager = LinearLayoutManager(requireContext())
-                            }
-
-                        }
-
-                        override fun onFailure(call: Call<Data>, t: Throwable) {
-                            Log.d("Filmopedia", "Error", t)
-                        }
-                    })
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-
-        })
-    }
-*/
 
     override fun onDestroyView() {
         super.onDestroyView()
