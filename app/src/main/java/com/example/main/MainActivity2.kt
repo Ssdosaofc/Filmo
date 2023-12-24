@@ -71,67 +71,7 @@ class MainActivity2 : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
     }
-/*
-    companion object {
-    fun removeFromFavourite(adapter: ViewAdapter, context: Context, title: String, overview: String, poster: ImageView) {
-        val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-        var timeStamp: Long = System.currentTimeMillis()
 
-        val sanitizedDesc = sanitizeFirebasePath(overview)
-        val hashMap: HashMap<String, Any> = HashMap()
-        hashMap["title"] = title
-        hashMap["overview"] = sanitizedDesc
-        hashMap["poster"] = poster.toString()
-
-        val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
-
-        val movieId = UUID.randomUUID().toString()
-        ref.child(firebaseAuth.uid.toString()).child("Favourites")
-            .child(movieId)
-            .removeValue()
-            .addOnSuccessListener {
-                Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Could not Remove from Favourites", Toast.LENGTH_SHORT)
-                    .show()
-            }
-    }
-
-    fun addToFavourite(adapter: ViewAdapter, context: Context, title: String, overview: String, poster: ImageView) {
-        val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-        var timeStamp: Long = System.currentTimeMillis()
-
-        val sanitizedDesc = sanitizeFirebasePath(overview)
-        val hashMap: HashMap<String, Any> = HashMap()
-        hashMap["title"] = title
-        hashMap["overview"] = sanitizedDesc
-        hashMap["poster"] = poster.toString()
-
-        val movieId = UUID.randomUUID().toString()
-        val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
-
-        ref.child(firebaseAuth.uid.toString()).child("Favourites")
-            .child(movieId)
-            .setValue(hashMap)
-            .addOnSuccessListener {
-                Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(context, "Could not Add to Favourites", Toast.LENGTH_SHORT).show()
-            }
-
-
-    }
-
-        private fun sanitizeFirebasePath(title: String): String {
-            // Replace invalid characters with underscores
-            return title.replace(Regex("[.#$\\[\\]]"), "_")
-        }
-
-
-    }
- */
 
 }
 

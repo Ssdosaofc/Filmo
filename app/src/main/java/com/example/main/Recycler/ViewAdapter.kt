@@ -52,13 +52,12 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
         Glide.with(context).load(POSTER_BASE_URL + film.posterPath).into(holder.moviePoster)
 
         firebaseAuth = FirebaseAuth.getInstance()
-
+/*
         if (firebaseAuth.currentUser != null) {
             checkIfFavourite(holder, film.title, film.overview, film.posterPath)
         }
 
-
-
+ */
     }
 
     private fun checkIfFavourite(holder: MovieViewHolder, title: String, overview: String, poster: String){
