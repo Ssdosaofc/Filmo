@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.UUID
 
 const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342"
 class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAdapter.MovieViewHolder>() {
@@ -48,7 +50,7 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
         holder.movieDescriptiom.text = film.overview
 
         Glide.with(context).load(POSTER_BASE_URL + film.posterPath).into(holder.moviePoster)
-/*
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         if (firebaseAuth.currentUser != null) {
@@ -56,16 +58,16 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
         }
 
 
- */
+
     }
-/*
-    private fun checkIfFavourite(holder: MovieViewHolder, title: String, overview: String, posterPath: String){
+
+    private fun checkIfFavourite(holder: MovieViewHolder, title: String, overview: String, poster: String){
         val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
         val reference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
         reference.child(firebaseAuth.uid.toString()).child("Favourites")
             .child(title)
             .child(overview)
-            .child(posterPath)
+            .child(poster)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot){
                     isInMyFavourite = dataSnapshot.exists()
@@ -82,13 +84,61 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
 
         holder.favButton.setOnClickListener{
             if (isInMyFavourite){
-                MainActivity2.removeFromFavourite(this,context, holder.movieTitle.toString(), holder.movieDescriptiom.toString(), holder.moviePoster)
+                removeFromFavourite(context, holder.movieTitle.toString(), holder.movieDescriptiom.toString(), holder.moviePoster)
             }else{
-                MainActivity2.addToFavourite(this,context, holder.movieTitle.toString(), holder.movieDescriptiom.toString(), holder.moviePoster)
+                addToFavourite(context, holder.movieTitle.toString(), holder.movieDescriptiom.toString(), holder.moviePoster)
             }
         }
     }
 
 
- */
+}
+
+fun removeFromFavourite(context: Context, title: String, overview: String, poster: ImageView) {
+    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    val hashMap: HashMap<String, Any> = HashMap()
+    hashMap["title"] = title
+    hashMap["overview"] = overview
+    hashMap["poster"] = poster
+
+    val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
+
+    ref.child(firebaseAuth.uid.toString()).child("Favourites")
+        .child(title)
+        .child(overview)
+        .child(poster.toString())
+        .removeValue()
+        .addOnSuccessListener {
+            Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show()
+        }
+        .addOnFailureListener {
+            Toast.makeText(context, "Could not Remove from Favourites", Toast.LENGTH_SHORT)
+                .show()
+        }
+}
+
+fun addToFavourite(context: Context, title: String, overview: String, poster: ImageView) {
+    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    val hashMap: HashMap<String, Any> = HashMap()
+    hashMap["title"] = title
+    hashMap["overview"] = overview
+    hashMap["poster"] = poster
+
+    val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
+
+    ref.child(firebaseAuth.uid.toString()).child("Favourites")
+        .child(title)
+        .child(overview)
+        .child(poster.toString())
+        .setValue(hashMap)
+        .addOnSuccessListener {
+            Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
+        }
+        .addOnFailureListener {
+            Toast.makeText(context, "Could not Add to Favourites", Toast.LENGTH_SHORT).show()
+        }
+
+
 }
