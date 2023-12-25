@@ -12,6 +12,9 @@ data class Result(
     val posterPath: String,
 
     @SerializedName("title")
-    val title: String
+    val title: String,
+
+    @SerializedName("id")
+    val id: Int
 
 )

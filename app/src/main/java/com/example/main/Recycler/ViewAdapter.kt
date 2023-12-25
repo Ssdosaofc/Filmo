@@ -32,6 +32,7 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
         var movieTitle = itemView.findViewById<TextView>(R.id.movietitle)
         var movieDescriptiom = itemView.findViewById<TextView>(R.id.moviedetails)
         var favButton = itemView.findViewById<ImageButton>(R.id.favButton)
+        var movieID = itemView.findViewById<TextView>(R.id.movieID)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -48,44 +49,46 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
 
         holder.movieTitle.text = film.title
         holder.movieDescriptiom.text = film.overview
+        holder.movieID.text = film.id.toString()
 
         Glide.with(context).load(POSTER_BASE_URL + film.posterPath).into(holder.moviePoster)
 
         firebaseAuth = FirebaseAuth.getInstance()
-/*
+
         if (firebaseAuth.currentUser != null) {
             checkIfFavourite(holder, film.title, film.overview, film.posterPath)
         }
 
- */
+
     }
-/*
-    private fun checkIfFavourite(holder: MovieViewHolder, title: String, overview: String, poster: String){
-        val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    private fun checkIfFavourite(holder: MovieViewHolder, title: String, overview: String, poster: String) {
         val reference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
+
+        val movieId = holder.itemId.toString()
+
         reference.child(firebaseAuth.uid.toString()).child("Favourites")
-            .child(title)
-            .child(overview)
-            .child(poster)
+            .child(movieId)
             .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot){
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
                     isInMyFavourite = dataSnapshot.exists()
-                    if (isInMyFavourite){
+                    if (isInMyFavourite) {
                         holder.favButton.setImageResource(R.drawable.baseline_favorite_24_white)
-                    }else{
+                    } else {
                         holder.favButton.setImageResource(R.drawable.baseline_favorite_border_24)
                     }
                 }
-                override fun onCancelled(error: DatabaseError) {
 
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle error if needed
                 }
             })
 
-        holder.favButton.setOnClickListener{
-            if (isInMyFavourite){
-                removeFromFavourite(context, holder.movieTitle.toString(), holder.movieDescriptiom.toString(), holder.moviePoster)
-            }else{
-                addToFavourite(context, holder.movieTitle.toString(), holder.movieDescriptiom.toString(), holder.moviePoster)
+        holder.favButton.setOnClickListener {
+            if (isInMyFavourite) {
+                removeFromFavourite(context, movieId)
+            } else {
+                addToFavourite(context, movieId, title, overview, poster)
             }
         }
     }
@@ -93,20 +96,12 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
 
 }
 
-fun removeFromFavourite(context: Context, title: String, overview: String, poster: ImageView) {
+fun removeFromFavourite(context: Context, movieId: String) {
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-
-    val hashMap: HashMap<String, Any> = HashMap()
-    hashMap["title"] = title
-    hashMap["overview"] = overview
-    hashMap["poster"] = poster
-
     val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
     ref.child(firebaseAuth.uid.toString()).child("Favourites")
-        .child(title)
-        .child(overview)
-        .child(poster.toString())
+        .child(movieId)
         .removeValue()
         .addOnSuccessListener {
             Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show()
@@ -117,9 +112,8 @@ fun removeFromFavourite(context: Context, title: String, overview: String, poste
         }
 }
 
-fun addToFavourite(context: Context, title: String, overview: String, poster: ImageView) {
+fun addToFavourite(context: Context, movieId: String, title: String, overview: String, poster: String) {
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-
     val hashMap: HashMap<String, Any> = HashMap()
     hashMap["title"] = title
     hashMap["overview"] = overview
@@ -128,9 +122,7 @@ fun addToFavourite(context: Context, title: String, overview: String, poster: Im
     val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
     ref.child(firebaseAuth.uid.toString()).child("Favourites")
-        .child(title)
-        .child(overview)
-        .child(poster.toString())
+        .child(movieId)
         .setValue(hashMap)
         .addOnSuccessListener {
             Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
@@ -138,5 +130,5 @@ fun addToFavourite(context: Context, title: String, overview: String, poster: Im
         .addOnFailureListener {
             Toast.makeText(context, "Could not Add to Favourites", Toast.LENGTH_SHORT).show()
         }
- */
 }
+

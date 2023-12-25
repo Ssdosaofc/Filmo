@@ -41,6 +41,8 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val searchList: RecyclerView = binding.searchList
+        val searchbar: SearchView = binding.searchBar
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
