@@ -32,6 +32,7 @@
         android:text="Hello World!"
         android:textColor="@color/five"
         android:textSize="12sp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment_activity_main2"
         app:layout_constraintEnd_toStartOf="@+id/logout"
         app:layout_constraintStart_toStartOf="parent" />
