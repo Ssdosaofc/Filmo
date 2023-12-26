@@ -8,13 +8,13 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.main.MainActivity2
 import com.example.main.R
 import com.example.main.api.Result
+import com.example.main.api.Retrieve
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,8 +23,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.util.UUID
 
-const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342"
-class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAdapter.MovieViewHolder>() {
+class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<RetrieveAdapter.MovieViewHolder>() {
     var isInMyFavourite:Boolean = false
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -47,23 +46,21 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        val film = films[position]
 
-        if (holder.adapterPosition != RecyclerView.NO_POSITION) {
-            val film = films[position]
+        holder.movieTitle.text = film.title
+        holder.movieDescriptiom.text = film.overview
+        holder.movieID.text = film.movieID
 
-            holder.movieTitle.text = film.title
-            holder.movieDescriptiom.text = film.overview
-            holder.movieID.text = film.id.toString()
+        Glide.with(context).load(POSTER_BASE_URL + film.poster).into(holder.moviePoster)
 
-            Glide.with(context).load(POSTER_BASE_URL + film.posterPath).into(holder.moviePoster)
+        firebaseAuth = FirebaseAuth.getInstance()
 
-            firebaseAuth = FirebaseAuth.getInstance()
-
-            if (firebaseAuth.currentUser != null) {
-                checkIfFavourite(holder, film.id.toString())
-            }
+        if (firebaseAuth.currentUser != null) {
+            checkIfFavourite(holder, film.movieID)
         }
-        
+
+
     }
 
     private fun checkIfFavourite(holder: MovieViewHolder, movieID: String) {
@@ -102,50 +99,10 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
         val movie = films[holder.adapterPosition]
 
         if (movie.isFavorite) {
-            removeFromFavourite(context, movie.id.toString())
+            removeFromFavourite(context, movie.movieID)
         } else {
-            addToFavourite(context, movie.id.toString(), movie.title,movie.posterPath, movie.overview)
+            addToFavourite(context, movie.movieID, movie.title,movie.movieID, movie.overview)
         }
     }
 
-
-
 }
-
-fun removeFromFavourite(context: Context, movieID: String) {
-    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
-
-    ref.child(firebaseAuth.uid.toString()).child("Favourites")
-        .child(movieID)
-        .removeValue()
-        .addOnSuccessListener {
-            Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show()
-        }
-        .addOnFailureListener {
-            Toast.makeText(context, "Could not Remove from Favourites", Toast.LENGTH_SHORT)
-                .show()
-        }
-}
-
-fun addToFavourite(context: Context, movieID: String,title: String, poster: String, overview: String) {
-    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    val hashMap: HashMap<String, Any> = HashMap()
-    hashMap["movieID"] = movieID
-    hashMap["title"] = title
-    hashMap["poster"] = poster
-    hashMap["overview"] = overview
-
-    val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
-
-    ref.child(firebaseAuth.uid.toString()).child("Favourites")
-        .child(movieID)
-        .setValue(hashMap)
-        .addOnSuccessListener {
-            Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
-        }
-        .addOnFailureListener {
-            Toast.makeText(context, "Could not Add to Favourites", Toast.LENGTH_SHORT).show()
-        }
-}
-

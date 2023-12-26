@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.notifications.NotificationsFragment"
-    tools:listitem="@layout/list_item">
+    tools:listitem="@layout/list_item"
+    android:id="@+id/favList">
 
 
 </androidx.recyclerview.widget.RecyclerView>

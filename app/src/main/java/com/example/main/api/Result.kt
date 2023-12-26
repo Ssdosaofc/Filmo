@@ -15,6 +15,7 @@ data class Result(
     val title: String,
 
     @SerializedName("id")
-    val id: Int
+    val id: Int,
 
+    var isFavorite: Boolean = false
 )
