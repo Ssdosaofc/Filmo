@@ -61,13 +61,13 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
             firebaseAuth = FirebaseAuth.getInstance()
 
             if (firebaseAuth.currentUser != null) {
-                checkIfFavourite(holder, film.id.toString())
+                checkIfFavourite(holder, film.id.toString(), position)
             }
         }
         
     }
 
-    private fun checkIfFavourite(holder: MovieViewHolder, movieID: String) {
+    private fun checkIfFavourite(holder: MovieViewHolder, movieID: String, position: Int) {
         val reference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         reference.child(firebaseAuth.uid.toString()).child("Favourites")
@@ -75,8 +75,10 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     isInMyFavourite = dataSnapshot.exists()
-                    films[holder.adapterPosition].isFavorite = isInMyFavourite
-                    updateFavoriteButton(holder)
+                    if (position < films.size) {
+                        films[position].isFavorite = isInMyFavourite
+                        updateFavoriteButton(holder, position)
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -85,29 +87,34 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
             })
 
         holder.favButton.setOnClickListener {
-            toggleFavoriteStatus(holder)
+            toggleFavoriteStatus(holder, position)
         }
     }
 
-    private fun updateFavoriteButton(holder: MovieViewHolder) {
-        val movie = films[holder.adapterPosition]
+    private fun updateFavoriteButton(holder: MovieViewHolder, position: Int) {
+        if (position < films.size) {
+            val movie = films[position]
 
-        if (movie.isFavorite) {
-            holder.favButton.setImageResource(R.drawable.baseline_favorite_24_white)
-        } else {
-            holder.favButton.setImageResource(R.drawable.baseline_favorite_border_24)
+            if (movie.isFavorite) {
+                holder.favButton.setImageResource(R.drawable.baseline_favorite_24_white)
+            } else {
+                holder.favButton.setImageResource(R.drawable.baseline_favorite_border_24)
+            }
         }
     }
 
-    private fun toggleFavoriteStatus(holder: MovieViewHolder) {
-        val movie = films[holder.adapterPosition]
+    private fun toggleFavoriteStatus(holder: MovieViewHolder, position: Int) {
+        if (position < films.size) {
+            val movie = films[position]
 
-        if (movie.isFavorite) {
-            removeFromFavourite(context, movie.id.toString())
-        } else {
-            addToFavourite(context, movie.id.toString(), movie.title,movie.posterPath, movie.overview)
+            if (movie.isFavorite) {
+                removeFromFavourite(context, movie.id.toString())
+            } else {
+                addToFavourite(context, movie.id.toString(), movie.title, movie.posterPath, movie.overview)
+            }
         }
     }
+
 
 
 

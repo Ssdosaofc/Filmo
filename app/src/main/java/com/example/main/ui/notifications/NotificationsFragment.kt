@@ -1,6 +1,7 @@
 package com.example.main.ui.notifications
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,12 +48,13 @@ class NotificationsFragment : Fragment() {
         val favList: RecyclerView = binding.favList
         ref = FirebaseDatabase.getInstance().getReference("Users")
 
+        favList.setHasFixedSize(true)
+        favList.layoutManager = LinearLayoutManager(requireContext())
+
+        adapter = RetrieveAdapter(requireContext(), list)
+        favList.adapter = adapter
 
         notificationsViewModel.text.observe(viewLifecycleOwner) {
-            favList.setHasFixedSize(true)
-            favList.layoutManager = LinearLayoutManager(requireContext())
-            adapter = RetrieveAdapter(requireContext(), list)
-            favList.adapter = adapter
 
             val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
             val userId = firebaseAuth.currentUser?.uid
@@ -68,18 +70,21 @@ class NotificationsFragment : Fragment() {
 
         favoritesRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                synchronized(list) {
+                    val beforeSize = list.size
 
                     for (dataSnapshot: DataSnapshot in snapshot.children) {
-                        synchronized(list) {
-                            list.clear()
                         val retrieve: Retrieve? = dataSnapshot.getValue(Retrieve::class.java)
                         retrieve?.let {
                             list.add(it)
                         }
                     }
-                }
 
-                adapter?.notifyDataSetChanged()
+                    val afterSize = list.size
+                    Log.d("DataSize", "Before: $beforeSize, After: $afterSize")
+
+                    adapter.notifyDataSetChanged()
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {

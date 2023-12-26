@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
@@ -46,24 +47,25 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val film = films[position]
 
-        holder.movieTitle.text = film.title
-        holder.movieDescriptiom.text = film.overview
-        holder.movieID.text = film.movieID
+        if (position != RecyclerView.NO_POSITION && position < films.size) {
+            val film = films[position]
 
-        Glide.with(context).load(POSTER_BASE_URL + film.poster).into(holder.moviePoster)
+            holder.movieTitle.text = film.title
+            holder.movieDescriptiom.text = film.overview
+            holder.movieID.text = film.movieID
 
-        firebaseAuth = FirebaseAuth.getInstance()
+            Glide.with(context).load(POSTER_BASE_URL + film.poster).into(holder.moviePoster)
 
-        if (firebaseAuth.currentUser != null) {
-            checkIfFavourite(holder, film.movieID)
+            firebaseAuth = FirebaseAuth.getInstance()
+
+            if (firebaseAuth.currentUser != null) {
+                checkIfFavourite(holder, film.movieID, position)
+            }
         }
-
-
     }
 
-    private fun checkIfFavourite(holder: MovieViewHolder, movieID: String) {
+    private fun checkIfFavourite(holder: MovieViewHolder, movieID: String, position: Int) {
         val reference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         reference.child(firebaseAuth.uid.toString()).child("Favourites")
@@ -71,8 +73,10 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     isInMyFavourite = dataSnapshot.exists()
-                    films[holder.adapterPosition].isFavorite = isInMyFavourite
-                    updateFavoriteButton(holder)
+                    if (position < films.size) {
+                        films[position].isFavorite = isInMyFavourite
+                        updateFavoriteButton(holder, position)
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -81,27 +85,31 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
             })
 
         holder.favButton.setOnClickListener {
-            toggleFavoriteStatus(holder)
+            toggleFavoriteStatus(holder, position)
         }
     }
 
-    private fun updateFavoriteButton(holder: MovieViewHolder) {
-        val movie = films[holder.adapterPosition]
+    private fun updateFavoriteButton(holder: MovieViewHolder, position: Int) {
+        if (position < films.size) {
+            val movie = films[position]
 
-        if (movie.isFavorite) {
-            holder.favButton.setImageResource(R.drawable.baseline_favorite_24_white)
-        } else {
-            holder.favButton.setImageResource(R.drawable.baseline_favorite_border_24)
+            if (movie.isFavorite) {
+                holder.favButton.setImageResource(R.drawable.baseline_favorite_24_white)
+            } else {
+                holder.favButton.setImageResource(R.drawable.baseline_favorite_border_24)
+            }
         }
     }
 
-    private fun toggleFavoriteStatus(holder: MovieViewHolder) {
-        val movie = films[holder.adapterPosition]
+    private fun toggleFavoriteStatus(holder: MovieViewHolder, position: Int) {
+        if (position < films.size) {
+            val movie = films[position]
 
-        if (movie.isFavorite) {
-            removeFromFavourite(context, movie.movieID)
-        } else {
-            addToFavourite(context, movie.movieID, movie.title,movie.movieID, movie.overview)
+            if (movie.isFavorite) {
+                removeFromFavourite(context, movie.movieID)
+            } else {
+                addToFavourite(context, movie.movieID, movie.title, movie.movieID, movie.overview)
+            }
         }
     }
 
