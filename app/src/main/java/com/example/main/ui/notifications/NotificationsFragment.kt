@@ -68,10 +68,10 @@ class NotificationsFragment : Fragment() {
 
         favoritesRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                synchronized(list) {
-                    list.clear()
 
                     for (dataSnapshot: DataSnapshot in snapshot.children) {
+                        synchronized(list) {
+                            list.clear()
                         val retrieve: Retrieve? = dataSnapshot.getValue(Retrieve::class.java)
                         retrieve?.let {
                             list.add(it)
@@ -79,9 +79,7 @@ class NotificationsFragment : Fragment() {
                     }
                 }
 
-                if (adapter != null) {
-                    adapter.notifyDataSetChanged()
-                }
+                adapter?.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {

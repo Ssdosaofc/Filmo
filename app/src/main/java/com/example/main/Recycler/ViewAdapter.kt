@@ -48,7 +48,8 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
 
-        if (holder.adapterPosition != RecyclerView.NO_POSITION) {
+        val position = holder.adapterPosition
+        if (position != RecyclerView.NO_POSITION && position < films.size)  {
             val film = films[position]
 
             holder.movieTitle.text = film.title
