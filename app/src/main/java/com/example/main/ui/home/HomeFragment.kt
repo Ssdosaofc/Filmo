@@ -44,25 +44,30 @@ class HomeFragment : Fragment() {
 
         val popularList: RecyclerView = binding.popularList
         homeViewModel.text.observe(viewLifecycleOwner) {
-            val film = MovieService.movieInterface.getMovies("en-US", 1)
-            film.enqueue(object : Callback<Data> {
-                override fun onResponse(call: Call<Data>, response: Response<Data>) {
-                    val data = response.body()
-                    if (data != null) {
-                        Log.d("Filmopedia", data.toString())
-                        adapter = ViewAdapter(requireContext(), data.results)
-                        popularList.adapter = adapter
-                        popularList.layoutManager = LinearLayoutManager(requireContext())
-                    }
 
-                }
-
-                override fun onFailure(call: Call<Data>, t: Throwable) {
-                    Log.d("Filmopedia", "Error", t)
-                }
-            })
+            getPopularMovies(popularList)
         }
         return root
+    }
+
+    private fun getPopularMovies(popularList: RecyclerView) {
+        val film = MovieService.movieInterface.getMovies("en-US", 1)
+        film.enqueue(object : Callback<Data> {
+            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+                val data = response.body()
+                if (data != null) {
+                    Log.d("Filmopedia", data.toString())
+                    adapter = ViewAdapter(requireContext(), data.results)
+                    popularList.adapter = adapter
+                    popularList.layoutManager = LinearLayoutManager(requireContext())
+                }
+
+            }
+
+            override fun onFailure(call: Call<Data>, t: Throwable) {
+                Log.d("Filmopedia", "Error", t)
+            }
+        })
     }
 
     override fun onDestroyView() {
