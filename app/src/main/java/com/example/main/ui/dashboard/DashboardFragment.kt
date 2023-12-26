@@ -43,38 +43,41 @@ class DashboardFragment : Fragment() {
         val searchbar: SearchView = binding.searchBar
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
-            searchbar.setOnQueryTextListener(object : OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String): Boolean {
-                    val film = SearchService.searchInterface.getMovies(query, false, "en-US", 1)
-                    film.enqueue(object : Callback<Data> {
-                        override fun onResponse(call: Call<Data>, response: Response<Data>) {
-                            val data = response.body()
-                            if (data != null) {
-                                Log.d("Filmopedia", data.toString())
-                                adapter = ViewAdapter(requireContext(), data.results)
-                                searchList.adapter = adapter
-                                searchList.layoutManager = LinearLayoutManager(requireContext())
-                            }
-
-                        }
-
-                        override fun onFailure(call: Call<Data>, t: Throwable) {
-                            Log.d("Filmopedia", "Error", t)
-                        }
-                    })
-                    return false
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    return false
-                }
-
-            })
+            searchMovies(searchList, searchbar)
         }
 
         return root
     }
 
+    private fun searchMovies(searchList: RecyclerView, searchbar: SearchView) {
+        searchbar.setOnQueryTextListener(object : OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                val film = SearchService.searchInterface.getMovies(query, false, "en-US", 1)
+                film.enqueue(object : Callback<Data> {
+                    override fun onResponse(call: Call<Data>, response: Response<Data>) {
+                        val data = response.body()
+                        if (data != null) {
+                            Log.d("Filmopedia", data.toString())
+                            adapter = ViewAdapter(requireContext(), data.results)
+                            searchList.adapter = adapter
+                            searchList.layoutManager = LinearLayoutManager(requireContext())
+                        }
+
+                    }
+
+                    override fun onFailure(call: Call<Data>, t: Throwable) {
+                        Log.d("Filmopedia", "Error", t)
+                    }
+                })
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
+    }
 
 
     override fun onDestroyView() {
