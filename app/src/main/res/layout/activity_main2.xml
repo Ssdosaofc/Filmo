@@ -19,7 +19,7 @@
     <View
         android:id="@+id/myRectangleView"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:background="@drawable/rectangle"
         tools:layout_editor_absoluteY="56dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,12 +34,23 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment_activity_main2"
         app:layout_constraintEnd_toStartOf="@+id/logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/Filmo"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:text="Filmopedia"
+        android:textColor="@color/five"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/userdetails"
+        app:layout_constraintEnd_toStartOf="@+id/logout"
+        app:layout_constraintStart_toStartOf="parent" />
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:layout_gravity="right"
         android:background="@color/two"
         android:text="@string/logout"
