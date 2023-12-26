@@ -1,4 +1,4 @@
-package com.example.main.ui.dashboard
+package com.example.main.ui.Search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.example.main.ui.dashboard
+package com.example.main.ui.Search
 
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.main.Recycler.RetrieveAdapter
 import com.example.main.Recycler.ViewAdapter
 import com.example.main.api.Data
-import com.example.main.api.MovieService
-import com.example.main.api.Retrieve
 import com.example.main.api.SearchService
 import com.example.main.databinding.FragmentDashboardBinding
 import retrofit2.Call

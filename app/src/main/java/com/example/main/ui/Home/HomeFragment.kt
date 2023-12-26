@@ -1,28 +1,21 @@
-package com.example.main.ui.home
+package com.example.main.ui.Home
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.main.R
 import com.example.main.Recycler.ViewAdapter
 import com.example.main.api.Data
 import com.example.main.api.MovieService
 import com.example.main.databinding.FragmentHomeBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.reflect.Member
 
 class HomeFragment : Fragment() {
     lateinit var adapter: ViewAdapter
@@ -46,6 +39,7 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
 
             getPopularMovies(popularList)
+
         }
         return root
     }
