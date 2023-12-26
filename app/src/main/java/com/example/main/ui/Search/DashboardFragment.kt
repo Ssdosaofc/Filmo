@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import com.example.main.databinding.FragmentDashboardBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Locale
 
 class DashboardFragment : Fragment() {
     lateinit var adapter: ViewAdapter
@@ -69,7 +71,31 @@ class DashboardFragment : Fragment() {
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onQueryTextChange(newText: String): Boolean {
+
+                val text = newText.toLowerCase(Locale.getDefault())
+                if (text.isNotEmpty()){
+                    val film = SearchService.searchInterface.getMovies(text, false, "en-US", 1)
+                    film.enqueue(object : Callback<Data> {
+                        override fun onResponse(call: Call<Data>, response: Response<Data>) {
+                            val data = response.body()
+                            if (data != null) {
+
+                                Log.d("Filmopedia", data.toString())
+                                adapter = ViewAdapter(requireContext(), data.results)
+                                searchList.adapter = adapter
+                                searchList.layoutManager = LinearLayoutManager(requireContext())
+
+                            }
+
+                        }
+
+                        override fun onFailure(call: Call<Data>, t: Throwable) {
+                            Log.d("Filmopedia", "Error", t)
+                        }
+                    })
+                }
+
                 return false
             }
 
