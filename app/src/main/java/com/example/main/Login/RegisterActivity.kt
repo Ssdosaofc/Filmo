@@ -72,7 +72,7 @@ class RegisterActivity : AppCompatActivity() {
                         val userDetails = userDetails(email, password)
 
                         ref.child("users")
-                            .child(auth.uid.toString())
+                            .child(auth.uid.toString()).child("User Details")
                             .setValue(userDetails)
 
                         Toast.makeText(this, "Account created", Toast.LENGTH_SHORT).show()
