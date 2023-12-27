@@ -55,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
+                        progressBar.visibility = View.GONE
                         Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT)
                             .show()
                     }

@@ -21,7 +21,6 @@ class HomeFragment : Fragment() {
     lateinit var adapter: ViewAdapter
 
     private var _binding: FragmentHomeBinding? = null
-    //lateinit var member:QuestionMember
     private val binding get() = _binding!!
 
     override fun onCreateView(

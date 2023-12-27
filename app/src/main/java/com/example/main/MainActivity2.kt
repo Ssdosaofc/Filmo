@@ -33,6 +33,10 @@ class MainActivity2 : AppCompatActivity() {
         binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+
         auth= FirebaseAuth.getInstance()
         val button = findViewById<Button>(R.id.logout)
         val textView = findViewById<TextView>(R.id.userdetails)
