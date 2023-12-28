@@ -17,7 +17,8 @@
         android:layout_margin="20sp"
         android:background="@drawable/favoritecolor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/filter"/>
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search_bar"

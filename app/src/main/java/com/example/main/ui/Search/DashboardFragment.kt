@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.forEach
@@ -40,9 +42,19 @@ class DashboardFragment : Fragment() {
         val root: View = binding.root
         val searchList: RecyclerView = binding.searchList
         val searchbar: SearchView = binding.searchBar
+        val filter:Button = binding.filter
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
             searchMovies(searchList, searchbar)
+
+            filter.setOnClickListener(object : OnClickListener {
+                override fun onClick(v: View?) {
+                    val dialog:FilterDialog = FilterDialog()
+                    dialog.show(requireActivity().supportFragmentManager, "Filter Dialog")
+                }
+
+            })
+
         }
 
         return root
