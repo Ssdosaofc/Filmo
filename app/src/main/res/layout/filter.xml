@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,52 +13,59 @@
         android:id="@+id/genre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_above="@+id/rating"
         android:text="Genre"
-
-         />
+        app:layout_constraintRight_toLeftOf="@id/genreList"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_above="@+id/language"
-
-        android:text="Rating"/>
-
+        app:layout_constraintRight_toLeftOf="@id/ratingList"
+        android:layout_marginTop="16dp"
+        android:text="Rating"
+        app:layout_constraintTop_toBottomOf="@+id/genre"
+        tools:layout_editor_absoluteX="5dp" />
 
     <TextView
         android:id="@+id/language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Language"/>
+        android:text="Language"
+        app:layout_constraintStart_toStartOf="@+id/rating"
+        app:layout_constraintTop_toBottomOf="@+id/rating" />
 
     <Spinner
-        android:id="@+id/genrelist"
+        android:id="@+id/genreList"
         android:layout_width="117dp"
         android:layout_height="18dp"
-        android:layout_above="@+id/ratinglist"
 
-        android:layout_marginStart="41dp"
-        android:layout_marginBottom="38dp"
-        android:layout_toEndOf="@+id/genre" />
+        android:layout_marginStart="116dp"
+        android:layout_toRightOf="@id/language"
+        app:layout_constraintBottom_toBottomOf="@+id/genre"
+        app:layout_constraintStart_toEndOf="@+id/genre" />
 
     <Spinner
-        android:id="@+id/ratinglist"
+        android:id="@+id/ratingList"
         android:layout_width="117dp"
         android:layout_height="18dp"
+
+        android:layout_marginStart="112dp"
         android:layout_marginTop="16dp"
-        android:layout_toEndOf="@+id/genre"
-        android:layout_above="@+id/languagelist"
-        />
+        android:layout_toRightOf="@id/language"
+        app:layout_constraintStart_toEndOf="@+id/rating"
+        app:layout_constraintTop_toBottomOf="@+id/genreList" />
 
     <Spinner
-        android:id="@+id/languagelist"
+        android:id="@+id/langList"
         android:layout_width="117dp"
         android:layout_height="18dp"
 
-        android:layout_toRightOf="@id/language"/>
-</RelativeLayout>
+        android:layout_marginTop="16dp"
+        android:layout_toRightOf="@id/language"
+        app:layout_constraintEnd_toEndOf="@+id/ratingList"
+        app:layout_constraintTop_toBottomOf="@+id/ratingList" />
+</androidx.constraintlayout.widget.ConstraintLayout>

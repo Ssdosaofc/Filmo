@@ -89,7 +89,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Genres"
+        android:textSize="12dp"
+        android:text="Genre(s)-"
         app:layout_constraintStart_toEndOf="@+id/movieimage"
         app:layout_constraintTop_toBottomOf="@+id/movietitle" />
 
@@ -98,7 +99,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Language"
+        android:textSize="12dp"
+        android:text="Language-"
         app:layout_constraintStart_toEndOf="@+id/movieimage"
         app:layout_constraintTop_toBottomOf="@+id/genres" />
 
@@ -107,7 +109,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Popularity"
+        android:text="Popularity-"
+        android:textSize="12dp"
         app:layout_constraintBottom_toTopOf="@+id/moviedetails"
         app:layout_constraintStart_toEndOf="@+id/movieimage"
         app:layout_constraintTop_toBottomOf="@+id/language"
