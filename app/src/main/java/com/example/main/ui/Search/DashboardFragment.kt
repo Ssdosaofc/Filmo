@@ -7,6 +7,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.core.view.forEach
@@ -43,9 +44,10 @@ class DashboardFragment : Fragment() {
         val searchList: RecyclerView = binding.searchList
         val searchbar: SearchView = binding.searchBar
         val filter:Button = binding.filter
+        val progressBar = binding.progress
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
-            searchMovies(searchList, searchbar)
+            searchMovies(searchList, searchbar, progressBar)
 
             filter.setOnClickListener(object : OnClickListener {
                 override fun onClick(v: View?) {
@@ -60,9 +62,10 @@ class DashboardFragment : Fragment() {
         return root
     }
 
-    private fun searchMovies(searchList: RecyclerView, searchbar: SearchView) {
+    private fun searchMovies(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar) {
         searchbar.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+                progressBar.visibility = View.VISIBLE
                 val film = SearchService.searchInterface.getMovies(query, false, "en-US", 1)
                 film.enqueue(object : Callback<Data> {
                     override fun onResponse(call: Call<Data>, response: Response<Data>) {
@@ -80,6 +83,7 @@ class DashboardFragment : Fragment() {
                         Log.d("Filmopedia", "Error", t)
                     }
                 })
+                progressBar.visibility = View.GONE
                 return false
             }
 

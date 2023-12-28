@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,6 +21,7 @@ import com.example.main.databinding.ActivityMain2Binding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.core.view.View
 import java.util.UUID
 
 class MainActivity2 : AppCompatActivity() {
@@ -40,6 +42,7 @@ class MainActivity2 : AppCompatActivity() {
         auth= FirebaseAuth.getInstance()
         val button = findViewById<Button>(R.id.logout)
         val textView = findViewById<TextView>(R.id.userdetails)
+        val progressBar: ProgressBar = findViewById(R.id.progress)
         val user =auth.currentUser
 
         val navView: BottomNavigationView = binding.navView
@@ -63,10 +66,12 @@ class MainActivity2 : AppCompatActivity() {
 
 
         button.setOnClickListener {
+            progressBar.visibility = android.view.View.VISIBLE
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
+            progressBar.visibility = android.view.View.GONE
         }
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

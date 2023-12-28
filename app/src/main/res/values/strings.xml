@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Main</string>>
+    <string name="app_name">Filmopedia</string>>
     <string name="email">email</string>
     <string name="password">Password</string>
     <string name="verify_password">Verify Password</string>
