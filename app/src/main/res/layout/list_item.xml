@@ -18,17 +18,17 @@
     <TextView
         android:id="@+id/movietitle"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:maxLines="@integer/material_motion_duration_long_2"
-        android:textSize="20sp"
+        android:maxLines="3"
+        android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/moviedetails"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/movieimage"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/moviedetails"
@@ -36,12 +36,12 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="32dp"
-        android:textSize="15dp"
+        android:textSize="10dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/movieimage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/movieimage"
-        app:layout_constraintTop_toBottomOf="@+id/movietitle"
+        app:layout_constraintTop_toBottomOf="@+id/popularity"
         android:ellipsize="end"/>
 
     <TextView
@@ -62,6 +62,7 @@
         android:layout_height="1dp"
         android:layout_margin="8dp"
         android:background="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movieimage"
         tools:layout_editor_absoluteX="8dp" />
 
@@ -83,7 +84,34 @@
         android:id="@+id/favButton"
         />
 
+    <TextView
+        android:id="@+id/genres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Genres"
+        app:layout_constraintStart_toEndOf="@+id/movieimage"
+        app:layout_constraintTop_toBottomOf="@+id/movietitle" />
 
+    <TextView
+        android:id="@+id/language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Language"
+        app:layout_constraintStart_toEndOf="@+id/movieimage"
+        app:layout_constraintTop_toBottomOf="@+id/genres" />
+
+    <TextView
+        android:id="@+id/popularity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Popularity"
+        app:layout_constraintBottom_toTopOf="@+id/moviedetails"
+        app:layout_constraintStart_toEndOf="@+id/movieimage"
+        app:layout_constraintTop_toBottomOf="@+id/language"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

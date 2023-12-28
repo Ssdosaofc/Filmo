@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:gravity="center"
+    >
+
+
+    <TextView
+        android:id="@+id/genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/rating"
+        android:text="Genre"
+
+         />
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_above="@+id/language"
+
+        android:text="Rating"/>
+
+
+    <TextView
+        android:id="@+id/language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Language"/>
+
+    <Spinner
+        android:id="@+id/genrelist"
+        android:layout_width="117dp"
+        android:layout_height="18dp"
+        android:layout_above="@+id/ratinglist"
+
+        android:layout_marginStart="41dp"
+        android:layout_marginBottom="38dp"
+        android:layout_toEndOf="@+id/genre" />
+
+    <Spinner
+        android:id="@+id/ratinglist"
+        android:layout_width="117dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/genre"
+        android:layout_above="@+id/languagelist"
+        />
+
+    <Spinner
+        android:id="@+id/languagelist"
+        android:layout_width="117dp"
+        android:layout_height="18dp"
+
+        android:layout_toRightOf="@id/language"/>
+</RelativeLayout>
