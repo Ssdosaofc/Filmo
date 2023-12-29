@@ -64,26 +64,34 @@ class DashboardFragment : Fragment() {
 
     private fun searchMovies(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar) {
         searchbar.setOnQueryTextListener(object : OnQueryTextListener {
+            // ...
+
             override fun onQueryTextSubmit(query: String): Boolean {
-                progressBar.visibility = View.VISIBLE
-                val film = SearchService.searchInterface.getMovies(query, false, "en-US", 1)
-                film.enqueue(object : Callback<Data> {
-                    override fun onResponse(call: Call<Data>, response: Response<Data>) {
-                        val data = response.body()
-                        if (data != null) {
-                            Log.d("Filmopedia", data.toString())
-                            adapter = ViewAdapter(requireContext(), data.results)
-                            searchList.adapter = adapter
-                            searchList.layoutManager = LinearLayoutManager(requireContext())
+                if (isAdded) { // Check if the fragment is attached
+                    progressBar.visibility = View.VISIBLE
+                    val film = SearchService.searchInterface.getMovies(query, false, "en-US", 1)
+                    film.enqueue(object : Callback<Data> {
+                        override fun onResponse(call: Call<Data>, response: Response<Data>) {
+                            if (isAdded) { // Check again before performing UI-related operations
+                                val data = response.body()
+                                if (data != null) {
+                                    Log.d("Filmopedia", data.toString())
+                                    adapter = ViewAdapter(requireContext(), data.results)
+                                    searchList.adapter = adapter
+                                    searchList.layoutManager = LinearLayoutManager(requireContext())
+                                }
+                                progressBar.visibility = View.GONE
+                            }
                         }
 
-                    }
-
-                    override fun onFailure(call: Call<Data>, t: Throwable) {
-                        Log.d("Filmopedia", "Error", t)
-                    }
-                })
-                progressBar.visibility = View.GONE
+                        override fun onFailure(call: Call<Data>, t: Throwable) {
+                            if (isAdded) {
+                                Log.d("Filmopedia", "Error", t)
+                                progressBar.visibility = View.GONE
+                            }
+                        }
+                    })
+                }
                 return false
             }
 
@@ -114,9 +122,9 @@ class DashboardFragment : Fragment() {
 
                 return false
             }
-
         })
     }
+
 
 
     override fun onDestroyView() {

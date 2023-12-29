@@ -34,6 +34,8 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
         var movieDescriptiom = itemView.findViewById<TextView>(R.id.moviedetails)
         var favButton = itemView.findViewById<ImageButton>(R.id.favButton)
         var movieID = itemView.findViewById<TextView>(R.id.movieID)
+        var lang = itemView.findViewById<TextView>(R.id.lang)
+        var pop = itemView.findViewById<TextView>(R.id.pop)
 
     }
 
@@ -54,6 +56,8 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
             holder.movieTitle.text = film.title
             holder.movieDescriptiom.text = film.overview
             holder.movieID.text = film.movieID
+            holder.lang.text = film.originalLanguage
+            holder.pop.text = film.popularity.toString()
 
             Glide.with(context).load(POSTER_BASE_URL + film.poster).into(holder.moviePoster)
 
@@ -108,7 +112,7 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
             if (movie.isFavorite) {
                 removeFromFavourite(context, movie.movieID)
             } else {
-                addToFavourite(context, movie.movieID, movie.title, movie.movieID, movie.overview)
+                addToFavourite(context, movie.movieID, movie.title, movie.poster, movie.overview,movie.originalLanguage,movie.popularity.toString())
             }
         }
     }

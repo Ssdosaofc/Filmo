@@ -9,5 +9,7 @@ data class Retrieve(
     val poster: String="",
     val title: String="",
     val movieID: String="",
+    val originalLanguage: String="",
+    val popularity: Double,
     var isFavorite: Boolean = false
 )

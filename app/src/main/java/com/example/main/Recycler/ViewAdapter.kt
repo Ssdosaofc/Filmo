@@ -34,6 +34,9 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
         var movieDescriptiom = itemView.findViewById<TextView>(R.id.moviedetails)
         var favButton = itemView.findViewById<ImageButton>(R.id.favButton)
         var movieID = itemView.findViewById<TextView>(R.id.movieID)
+        var lang = itemView.findViewById<TextView>(R.id.lang)
+        var pop = itemView.findViewById<TextView>(R.id.pop)
+
 
     }
 
@@ -47,14 +50,15 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-
         val position = holder.adapterPosition
-        if (position != RecyclerView.NO_POSITION && position < films.size)  {
+        if (position != RecyclerView.NO_POSITION && position < films.size) {
             val film = films[position]
 
             holder.movieTitle.text = film.title
             holder.movieDescriptiom.text = film.overview
             holder.movieID.text = film.id.toString()
+            holder.lang.text = film.originalLanguage
+            holder.pop.text = film.popularity.toString()
 
             Glide.with(context).load(POSTER_BASE_URL + film.posterPath).into(holder.moviePoster)
 
@@ -64,7 +68,6 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
                 checkIfFavourite(holder, film.id.toString(), position)
             }
         }
-        
     }
 
     private fun checkIfFavourite(holder: MovieViewHolder, movieID: String, position: Int) {
@@ -110,7 +113,7 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
             if (movie.isFavorite) {
                 removeFromFavourite(context, movie.id.toString())
             } else {
-                addToFavourite(context, movie.id.toString(), movie.title, movie.posterPath, movie.overview)
+                addToFavourite(context, movie.id.toString(), movie.title, movie.posterPath, movie.overview,movie.originalLanguage,movie.popularity.toString())
             }
         }
     }
@@ -136,13 +139,15 @@ fun removeFromFavourite(context: Context, movieID: String) {
         }
 }
 
-fun addToFavourite(context: Context, movieID: String,title: String, poster: String, overview: String) {
+fun addToFavourite(context: Context, movieID: String,title: String, poster: String, overview: String,lang: String,pop: String) {
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val hashMap: HashMap<String, Any> = HashMap()
     hashMap["movieID"] = movieID
     hashMap["title"] = title
     hashMap["poster"] = poster
     hashMap["overview"] = overview
+    hashMap["language"] = lang
+    hashMap["popularity"] = pop
 
     val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
