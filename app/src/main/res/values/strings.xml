@@ -45,7 +45,8 @@
         <item>Thriller</item>
         <item>War</item>
         <item>Western</item>
-    </string-array><string-array name="Ratings">
+    </string-array>
+    <string-array name="Ratings">
         <item>4.5 above</item>
         <item>4.0 to 4.5</item>
         <item>3.5 to 4.0</item>
