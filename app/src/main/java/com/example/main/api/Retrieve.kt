@@ -10,6 +10,6 @@ data class Retrieve(
     val title: String="",
     val movieID: String="",
     val originalLanguage: String="",
-    val popularity: Double,
+    val popularity: String= "",
     var isFavorite: Boolean = false
 )
