@@ -19,7 +19,7 @@
         android:theme="@style/Theme.Main"
         tools:targetApi="31">
         <activity
-            android:name=".api.MainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity2"
