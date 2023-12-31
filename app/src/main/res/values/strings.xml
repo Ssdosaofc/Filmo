@@ -26,6 +26,7 @@
     <string name="favourite">Favourites</string>
 
     <string-array name="Genres">
+        <item></item>
         <item>Action</item>
         <item>Adventure</item>
         <item>Animation</item>
@@ -47,6 +48,7 @@
         <item>Western</item>
     </string-array>
     <string-array name="Ratings">
+        <item></item>
         <item>4.5 above</item>
         <item>4.0 to 4.5</item>
         <item>3.5 to 4.0</item>
