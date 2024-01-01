@@ -36,6 +36,7 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
         var movieID = itemView.findViewById<TextView>(R.id.movieID)
         var lang = itemView.findViewById<TextView>(R.id.lang)
         var pop = itemView.findViewById<TextView>(R.id.pop)
+        var gen = itemView.findViewById<TextView>(R.id.gen)
 
     }
 
@@ -58,6 +59,29 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
             holder.movieID.text = film.movieID
             holder.lang.text = film.originalLanguage
             holder.pop.text = film.popularity.toString()
+
+            when (film.genre){
+                28 -> holder.gen.text = "Action"
+                12 -> holder.gen.text = "Adventure"
+                16 -> holder.gen.text = "Animation"
+                35 -> holder.gen.text = "Comedy"
+                80 -> holder.gen.text = "Crime"
+                99 -> holder.gen.text = "Documentary"
+                18 -> holder.gen.text = "Drama"
+                10751 -> holder.gen.text = "Family"
+                14 -> holder.gen.text = "Fantasy"
+                36 -> holder.gen.text = "History"
+                27 -> holder.gen.text = "Horror"
+                10402 -> holder.gen.text = "Music"
+                9648 -> holder.gen.text = "Mystery"
+                10749 -> holder.gen.text = "Romance"
+                878 -> holder.gen.text = "Science Fiction"
+                10770 -> holder.gen.text = "TV Movie"
+                53 -> holder.gen.text = "Thriller"
+                10752 -> holder.gen.text = "War"
+                37 -> holder.gen.text = "Western"
+
+            }
 
             Glide.with(context).load(POSTER_BASE_URL + film.poster).into(holder.moviePoster)
 
@@ -112,7 +136,7 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
             if (movie.isFavorite) {
                 removeFromFavourite(context, movie.movieID)
             } else {
-                addToFavourite(context, movie.movieID, movie.title, movie.poster, movie.overview,movie.originalLanguage,movie.popularity.toString())
+                addToFavourite(context, movie.movieID, movie.title, movie.poster, movie.overview,movie.originalLanguage,movie.popularity.toString(),movie.genre)
             }
         }
     }

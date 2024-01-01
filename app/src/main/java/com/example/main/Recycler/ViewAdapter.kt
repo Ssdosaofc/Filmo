@@ -36,6 +36,7 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
         var movieID = itemView.findViewById<TextView>(R.id.movieID)
         var lang = itemView.findViewById<TextView>(R.id.lang)
         var pop = itemView.findViewById<TextView>(R.id.pop)
+        var gen = itemView.findViewById<TextView>(R.id.gen)
 
 
     }
@@ -59,6 +60,31 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
             holder.movieID.text = film.id.toString()
             holder.lang.text = film.originalLanguage
             holder.pop.text = film.popularity.toString()
+
+            if (film.genreIds.isNotEmpty()) {
+                when (film.genreIds[0]){
+                    28 -> holder.gen.text = "Action"
+                    12 -> holder.gen.text = "Adventure"
+                    16 -> holder.gen.text = "Animation"
+                    35 -> holder.gen.text = "Comedy"
+                    80 -> holder.gen.text = "Crime"
+                    99 -> holder.gen.text = "Documentary"
+                    18 -> holder.gen.text = "Drama"
+                    10751 -> holder.gen.text = "Family"
+                    14 -> holder.gen.text = "Fantasy"
+                    36 -> holder.gen.text = "History"
+                    27 -> holder.gen.text = "Horror"
+                    10402 -> holder.gen.text = "Music"
+                    9648 -> holder.gen.text = "Mystery"
+                    10749 -> holder.gen.text = "Romance"
+                    878 -> holder.gen.text = "Science Fiction"
+                    10770 -> holder.gen.text = "TV Movie"
+                    53 -> holder.gen.text = "Thriller"
+                    10752 -> holder.gen.text = "War"
+                    37 -> holder.gen.text = "Western"
+
+                }
+            }
 
             Glide.with(context).load(POSTER_BASE_URL + film.posterPath).into(holder.moviePoster)
 
@@ -113,7 +139,7 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
             if (movie.isFavorite) {
                 removeFromFavourite(context, movie.id.toString())
             } else {
-                addToFavourite(context, movie.id.toString(), movie.title, movie.posterPath, movie.overview,movie.originalLanguage,movie.popularity.toString())
+                addToFavourite(context, movie.id.toString(), movie.title, movie.posterPath, movie.overview,movie.originalLanguage,movie.popularity.toString(), movie.genreIds[0])
             }
         }
     }
@@ -139,7 +165,7 @@ fun removeFromFavourite(context: Context, movieID: String) {
         }
 }
 
-fun addToFavourite(context: Context, movieID: String,title: String, poster: String, overview: String,lang: String,pop: String) {
+fun addToFavourite(context: Context, movieID: String,title: String, poster: String, overview: String,lang: String,pop: String, gen:Int) {
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val hashMap: HashMap<String, Any> = HashMap()
     hashMap["movieID"] = movieID
@@ -148,6 +174,7 @@ fun addToFavourite(context: Context, movieID: String,title: String, poster: Stri
     hashMap["overview"] = overview
     hashMap["language"] = lang
     hashMap["popularity"] = pop
+    hashMap["genre"] = gen
 
     val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
