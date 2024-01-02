@@ -59,5 +59,225 @@
         <item>1.0 to 1.5</item>
         <item>Below 1.0</item>
     </string-array>
+    <string-array name="Languages">
+        <item>Aragonese</item>
+        <item>Akan</item>
+        <item>Cree</item>
+        <item>Azerbaijani</item>
+        <item>Czech</item>
+        <item>Afar</item>
+        <item>Breton</item>
+        <item>Afrikaans</item>
+        <item>Tibetan</item>
+        <item>Chechen</item>
+        <item>Cornish</item>
+        <item>Faroese</item>
+        <item>Latin</item>
+        <item>Ndonga</item>
+        <item>Sardinian</item>
+        <item>Tigrinya</item>
+        <item>Tswana</item>
+        <item>Turkish</item>
+        <item>Punjabi</item>
+        <item>Estonian</item>
+        <item>French</item>
+        <item>Hausa</item>
+        <item>Icelandic</item>
+    <item>Limburgish</item>
+    <item>Lingala</item>
+    <item>Swati</item>
+    <item>Abkhazian</item>
+    <item>Serbo-Croatian</item>
+    <item>Basque</item>
+    <item>Frisian</item>
+    <item>Japanese</item>
+    <item>Ojibwa</item>
+    <item>Oriya</item>
+    <item>Pali</item>
+    <item>Sundanese</item>
+    <item>Thai</item>
+    <item>Igbo</item>
+    <item>Indonesian</item>
+    <item>Kazakh</item>
+    <item>Kikuyu</item>
+    <item>Uighur</item>
+    <item>Venda</item>
+    <item>Kinyarwanda</item>
+    <item>Maori</item>
+    <item>Navajo</item>
+    <item>Hindi</item>
+    <item>Portuguese</item>
+    <item>Sango</item>
+    <item>Slovak</item>
+    <item>Serbian</item>
+    <item>Tahitian</item>
+    <item>Xhosa</item>
+    <item>Arabic</item>
+    <item>Corsican</item>
+    <item>Bislama</item>
+    <item>Esperanto</item>
+    <item>Herero</item>
+    <item>Finnish</item>
+    <item>Inuktitut</item>
+    <item>Latvian</item>
+    <item>Italian</item>
+    <item>Dutch</item>
+    <item>Kannada</item>
+    <item>Sanskrit</item>
+    <item>Albanian</item>
+    <item>Tagalog</item>
+    <item>Letzeburgesch</item>
+    <item>Tsonga</item>
+    <item>Malayalam</item>
+    <item>Volapük</item>
+    <item>Zulu</item>
+    <item>Ossetian; Ossetic</item>
+    <item>Samoan</item>
+    <item>Zhuang</item>
+        <item>Bengali</item>
+<item>Slavic</item>
+<item>Irish</item>
+<item>Manx</item>
+<item>Hungarian</item>
+<item>Javanese</item>
+<item>Kanuri</item>
+<item>Khmer</item>
+<item>Kirghiz</item>
+<item>Nauru</item>
+<item>Ndebele</item>
+<item>Occitan</item>
+<item>Romanian</item>
+<item>Russian</item>
+<item>Armenian</item>
+<item>Chamorro</item>
+<item>No Language</item>
+<item>Bashkir</item>
+<item>Galician</item>
+<item>Ido</item>
+<item>Luba-Katanga</item>
+<item>Marshall</item>
+<item>Malagasy</item>
+<item>Moldavian</item>
+<item>Mongolian</item>
+<item>Ndebele</item>
+<item>Norwegian</item>
+<item>Polish</item>
+<item>Swahili</item>
+<item>Tajik</item>
+<item>Tonga</item>
+<item>Walloon</item>
+<item>Yiddish</item>
+<item>English</item>
+<item>Assamese</item>
+<item>Gaelic</item>
+<item>Kalaallisut</item>
+<item>Burmese</item>
+<item>Quechua</item>
+<item>Shona</item>
+<item>Ukrainian</item>
+<item>Persian</item>
+<item>Georgian</item>
+<item>Gujarati</item>
+<item>Avaric</item>
+<item>Avestan</item>
+<item>Guarani</item>
+<item>Maltese</item>
+<item>Nepali</item>
+<item>Swedish</item>
+<item>Tatar</item>
+<item>Wolof</item>
+<item>Cantonese</item>
+<item>Chuvash</item>
+<item>Danish</item>
+<item>Dzongkha</item>
+<item>Chichewa; Nyanja</item>
+<item>Rundi</item>
+<item>Sotho</item>
+<item>Turkmen</item>
+<item>Uzbek</item>
+<item>Vietnamese</item>
+<item>Greek</item>
+<item>Catalan</item>
+<item>Welsh</item>
+<item>German</item>
+<item>Kashmiri</item>
+<item>Malay</item>
+<item>Norwegian Bokmål</item>
+<item>Raeto-Romance</item>
+<item>Sinhalese</item>
+<item>Spanish</item>
+<item>Telugu</item>
+<item>Twi</item>
+<item>Pushto</item>
+<item>Bulgarian</item>
+<item>Macedonian</item>
+<item>Inupiaq</item>
+<item>Korean</item>
+<item>Lithuanian</item>
+<item>Oromo</item>
+<item>Northern Sami</item>
+<item>Somali</item>
+<item>Tamil</item>
+<item>Urdu</item>
+<item>Amharic</item>
+<item>Bosnian</item>
+<item>Divehi</item>
+<item>Aymara</item>
+<item>Bambara</item>
+<item>Yi</item>
+<item>Interlingue</item>
+<item>Komi</item>
+<item>Kurdish</item>
+<item>Norwegian Nynorsk</item>
+<item>Mandarin</item>
+<item>Hebrew</item>
+<item>Ewe</item>
+<item>Fijian</item>
+<item>Fulah</item>
+<item>Haitian; Haitian Creole</item>
+<item>Croatian</item>
+<item>Interlingua</item>
+<item>Kuanyama</item>
+<item>Lao</item>
+<item>Ganda</item>
+<item>Marathi</item>
+<item>Sindhi</item>
+<item>Belarusian</item>
+<item>Malay</item>
+<item>Romanian</item>
+<item>Bosnian</item>
+<item>Tonga</item>
+<item>Irish</item>
+<item>Kinyarwanda</item>
+<item>Tuvalu</item>
+<item>Kikuyu</item>
+<item>Romanian</item>
+<item>Czech</item>
+<item>Chamorro</item>
+<item>Indonesian</item>
+<item>Kirghiz</item>
+<item>Latvian</item>
+<item>Luba-Katanga</item>
+<item>Navajo</item>
+<item>Swedish</item>
+<item>Telugu</item>
+<item>Burmese</item>
+<item>Mongolian</item>
+<item>Sichuan Yi</item>
+<item>Tswana</item>
+<item>Swahili</item>
+<item>Uighur</item>
+<item>Turkish</item>
+<item>Ukrainian</item>
+<item>Vietnamese</item>
+<item>Volapük</item>
+<item>Walloon</item>
+<item>Wolof</item>
+<item>Xhosa</item>
+<item>Yoruba</item>
+<item>Zhuang</item>
+
+    </string-array>
+
 
 </resources>
