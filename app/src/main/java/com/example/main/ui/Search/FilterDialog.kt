@@ -49,6 +49,11 @@ class FilterDialog: AppCompatDialogFragment(), OnItemSelectedListener  {
         ratingList.adapter = adapter1
         ratingList.onItemSelectedListener = this
 
+        val adapter2:ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(requireContext(), R.array.Languages, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        languageList.adapter = adapter2
+        languageList.onItemSelectedListener = this
+
         return builder.create()
     }
 
