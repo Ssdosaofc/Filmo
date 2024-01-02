@@ -19,6 +19,7 @@ import com.example.main.Recycler.ViewAdapter
 import com.example.main.api.Data
 import com.example.main.api.SearchService
 import com.example.main.databinding.FragmentDashboardBinding
+import org.intellij.lang.annotations.Language
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,7 +48,7 @@ class DashboardFragment : Fragment() {
         val progressBar = binding.progress
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
-            searchMovies(searchList, searchbar, progressBar)
+            searchMovies(searchList, searchbar, progressBar,filter)
 
             filter.setOnClickListener(object : OnClickListener {
                 override fun onClick(v: View?) {
@@ -62,35 +63,14 @@ class DashboardFragment : Fragment() {
         return root
     }
 
-    private fun searchMovies(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar) {
+    private fun searchMovies(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar, filter:Button) {
         searchbar.setOnQueryTextListener(object : OnQueryTextListener {
-            // ...
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                if (isAdded) { // Check if the fragment is attached
+                if (isAdded) {
                     progressBar.visibility = View.VISIBLE
-                    val film = SearchService.searchInterface.getMovies(query, false, "en-US", 1)
-                    film.enqueue(object : Callback<Data> {
-                        override fun onResponse(call: Call<Data>, response: Response<Data>) {
-                            if (isAdded) { // Check again before performing UI-related operations
-                                val data = response.body()
-                                if (data != null) {
-                                    Log.d("Filmopedia", data.toString())
-                                    adapter = ViewAdapter(requireContext(), data.results)
-                                    searchList.adapter = adapter
-                                    searchList.layoutManager = LinearLayoutManager(requireContext())
-                                }
-                                progressBar.visibility = View.GONE
-                            }
-                        }
+                    searchResults(searchList,searchbar,progressBar,null,query)
 
-                        override fun onFailure(call: Call<Data>, t: Throwable) {
-                            if (isAdded) {
-                                Log.d("Filmopedia", "Error", t)
-                                progressBar.visibility = View.GONE
-                            }
-                        }
-                    })
                 }
                 return false
             }
@@ -99,25 +79,7 @@ class DashboardFragment : Fragment() {
 
                 val text = newText.toLowerCase(Locale.getDefault())
                 if (text.isNotEmpty()){
-                    val film = SearchService.searchInterface.getMovies(text, false, "en-US", 1)
-                    film.enqueue(object : Callback<Data> {
-                        override fun onResponse(call: Call<Data>, response: Response<Data>) {
-                            val data = response.body()
-                            if (data != null) {
-
-                                Log.d("Filmopedia", data.toString())
-                                adapter = ViewAdapter(requireContext(), data.results)
-                                searchList.adapter = adapter
-                                searchList.layoutManager = LinearLayoutManager(requireContext())
-
-                            }
-
-                        }
-
-                        override fun onFailure(call: Call<Data>, t: Throwable) {
-                            Log.d("Filmopedia", "Error", t)
-                        }
-                    })
+                    searchResults(searchList,searchbar,progressBar,null,text)
                 }
 
                 return false
@@ -125,6 +87,30 @@ class DashboardFragment : Fragment() {
         })
     }
 
+    private fun searchResults(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar,language: String?,query:String) {
+        val film = SearchService.searchInterface.getMovies(query, false, language, 1)
+        film.enqueue(object : Callback<Data> {
+            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+                if (isAdded) {
+                    val data = response.body()
+                    if (data != null) {
+                        Log.d("Filmopedia", data.toString())
+                        adapter = ViewAdapter(requireContext(), data.results)
+                        searchList.adapter = adapter
+                        searchList.layoutManager = LinearLayoutManager(requireContext())
+                    }
+                    progressBar.visibility = View.GONE
+                }
+            }
+
+            override fun onFailure(call: Call<Data>, t: Throwable) {
+                if (isAdded) {
+                    Log.d("Filmopedia", "Error", t)
+                    progressBar.visibility = View.GONE
+                }
+            }
+        })
+    }
 
 
     override fun onDestroyView() {
