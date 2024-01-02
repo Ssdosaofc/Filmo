@@ -19,7 +19,17 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.appcompat.view.menu.MenuView.ItemView
 import com.example.main.R
 
-class FilterDialog: AppCompatDialogFragment(), OnItemSelectedListener  {
+/*
+interface FilterListener {
+    fun onFilterApplied(language: String?)
+}
+
+ */
+
+class FilterDialog(//private val filterListener: FilterListener
+): AppCompatDialogFragment(), OnItemSelectedListener  {
+
+    //private var lang: String? = null
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireActivity())
         val inflater:LayoutInflater = requireActivity().layoutInflater
@@ -30,7 +40,9 @@ class FilterDialog: AppCompatDialogFragment(), OnItemSelectedListener  {
             .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which ->
 
             })
-            .setPositiveButton("Apply", DialogInterface.OnClickListener { dialog, which ->  })
+            .setPositiveButton("Apply", DialogInterface.OnClickListener { dialog, which ->
+                //filterListener.onFilterApplied(lang)
+            })
 
         val genre:TextView = view.findViewById(R.id.genre)
         val rating:TextView = view.findViewById(R.id.rating)
@@ -49,7 +61,7 @@ class FilterDialog: AppCompatDialogFragment(), OnItemSelectedListener  {
         ratingList.adapter = adapter1
         ratingList.onItemSelectedListener = this
 
-        val adapter2:ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(requireContext(), R.array.Languages, android.R.layout.simple_spinner_item)
+        val adapter2:ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(requireContext(), R.array.LangCodes, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         languageList.adapter = adapter2
         languageList.onItemSelectedListener = this
@@ -58,7 +70,7 @@ class FilterDialog: AppCompatDialogFragment(), OnItemSelectedListener  {
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-        val text:String = parent.getItemAtPosition(position).toString()
+        //lang = parent.getItemAtPosition(position).toString()
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {

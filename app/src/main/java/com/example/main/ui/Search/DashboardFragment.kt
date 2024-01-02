@@ -30,6 +30,8 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
+    //private lateinit var lang: String
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -48,47 +50,60 @@ class DashboardFragment : Fragment() {
         val progressBar = binding.progress
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
-            searchMovies(searchList, searchbar, progressBar,filter)
+            //searchMovies(searchList, searchbar, progressBar,filter)
 
             filter.setOnClickListener(object : OnClickListener {
                 override fun onClick(v: View?) {
-                    val dialog:FilterDialog = FilterDialog()
+
+                    var dialog = FilterDialog(
+                        /*
+                        object : FilterListener {
+
+                        override fun onFilterApplied(language: String?) {
+
+                            if (language != null) {
+                                lang = language
+                                searchResults(searchList,searchbar,progressBar,lang)
+                            }
+
+
+                        }
+
+                    }*/
+                    )
                     dialog.show(requireActivity().supportFragmentManager, "Filter Dialog")
                 }
 
+
             })
 
+            searchbar.setOnQueryTextListener(object : OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String): Boolean {
+                    if (isAdded) {
+                        progressBar.visibility = View.VISIBLE
+                        searchResults(searchList,searchbar,progressBar,null)
+
+                    }
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String): Boolean {
+                    val text = newText.toLowerCase(Locale.getDefault())
+                    if (text.isNotEmpty()){
+                        searchResults(searchList,searchbar,progressBar,null)
+                    }
+
+                    return false
+                }
+
+            })
         }
 
         return root
     }
 
-    private fun searchMovies(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar, filter:Button) {
-        searchbar.setOnQueryTextListener(object : OnQueryTextListener {
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-                if (isAdded) {
-                    progressBar.visibility = View.VISIBLE
-                    searchResults(searchList,searchbar,progressBar,null,query)
-
-                }
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-
-                val text = newText.toLowerCase(Locale.getDefault())
-                if (text.isNotEmpty()){
-                    searchResults(searchList,searchbar,progressBar,null,text)
-                }
-
-                return false
-            }
-        })
-    }
-
-    private fun searchResults(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar,language: String?,query:String) {
-        val film = SearchService.searchInterface.getMovies(query, false, language, 1)
+    private fun searchResults(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar,language: String?) {
+        val film = SearchService.searchInterface.getMovies(searchbar.query.toString(), false, language, 1)
         film.enqueue(object : Callback<Data> {
             override fun onResponse(call: Call<Data>, response: Response<Data>) {
                 if (isAdded) {
