@@ -30,8 +30,6 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
-    //private lateinit var lang: String
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -126,7 +124,6 @@ class DashboardFragment : Fragment() {
             }
         })
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
