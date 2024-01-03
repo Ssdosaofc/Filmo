@@ -75,6 +75,7 @@
                 android:text="Action"
                 android:textSize="12dp"
                 android:textAllCaps="false"
+                android:id="@+id/Action"
                 />
             <Button
                 android:layout_width="100dp"
@@ -84,6 +85,7 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Adventure"
                 />
             <Button
                 android:layout_width="100dp"
@@ -93,6 +95,7 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Animation"
                 />
             <Button
                 android:layout_width="100dp"
@@ -102,6 +105,7 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Comedy"
                 />
             <Button
                 android:layout_width="100dp"
@@ -111,6 +115,7 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Crime"
                 />
             <Button
                 android:layout_width="100dp"
@@ -120,6 +125,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Documentary"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -129,6 +136,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Drama"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -138,6 +147,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Family"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -147,6 +158,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Fantasy"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -156,6 +169,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/History"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -165,6 +180,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Horror"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -174,6 +191,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Music"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -183,6 +202,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Mystery"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -192,6 +213,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Romance"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -201,6 +224,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/ScienceFiction"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -210,6 +235,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/TVMovie"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -219,6 +246,8 @@
                 android:textSize="12dp"
                 android:textAllCaps="false"
                 android:layout_marginStart="5dp"
+                android:id="@+id/Thriller"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -227,6 +256,8 @@
                 android:text="War"
                 android:textSize="12dp"
                 android:textAllCaps="false"
+                android:id="@+id/War"
+
                 />
             <Button
                 android:layout_width="100dp"
@@ -235,6 +266,8 @@
                 android:text="Western"
                 android:textSize="12dp"
                 android:textAllCaps="false"
+                android:id="@+id/Western"
+
                 />
 
         </LinearLayout>
