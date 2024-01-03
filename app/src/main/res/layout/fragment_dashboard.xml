@@ -8,6 +8,16 @@
     app:menu="@menu/bottom_nav_menu"
     >
 
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -36,33 +46,22 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genre"
-        tools:listitem="@layout/list_item" />
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
+        tools:listitem="@layout/list_item" />
 
     <HorizontalScrollView
         android:id="@+id/genre"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        app:layout_constraintBottom_toTopOf="@id/searchList"
+        android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_bar"
         android:fillViewport="true"
-        android:layout_margin="5dp">
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -228,20 +227,20 @@
                 android:text="War"
                 android:textSize="12dp"
                 android:textAllCaps="false"
-                android:layout_marginStart="5dp"
                 />
-
             <Button
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:background="@drawable/filterbutton"
                 android:text="Western"
+                android:textSize="12dp"
                 android:textAllCaps="false"
-                android:textSize="12dp" />
+                />
 
         </LinearLayout>
     </HorizontalScrollView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
