@@ -67,8 +67,8 @@
         android:layout_height="30dp"
         android:background="@drawable/baseline_favorite_24_white"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/movieimage"
-        app:layout_constraintStart_toStartOf="@+id/movieimage" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/favButton"
