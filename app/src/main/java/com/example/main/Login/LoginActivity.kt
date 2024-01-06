@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         textView.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
-            finish()
+            //finish()
         }
 
         buttonLog.setOnClickListener {
@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
         if (currentUser != null) {
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
-            finish()
+            //finish()
         }
     }
 }
