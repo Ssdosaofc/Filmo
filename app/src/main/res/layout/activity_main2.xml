@@ -21,9 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/rectangle"
-        tools:layout_editor_absoluteY="56dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment_activity_main2"/>
+        app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment_activity_main2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/userdetails"
@@ -34,8 +33,7 @@
         android:textSize="12sp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment_activity_main2"
-        app:layout_constraintEnd_toStartOf="@+id/logout"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/logout"/>
 
     <TextView
         android:id="@+id/Filmo"
@@ -46,8 +44,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/userdetails"
-        app:layout_constraintEnd_toStartOf="@+id/logout"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/logout"/>
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
@@ -96,4 +93,33 @@
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="invisible"/>
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/myRectangleView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dark"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="@+id/myRectangleView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Light"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/myRectangleView"
+        app:layout_constraintEnd_toEndOf="@+id/switchCompat"
+        app:layout_constraintTop_toBottomOf="@+id/switchCompat" />
 </androidx.constraintlayout.widget.ConstraintLayout>

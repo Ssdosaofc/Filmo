@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.Favourites.NotificationsFragment"
     tools:listitem="@layout/list_item"
-    android:id="@+id/favList">
+    android:id="@+id/favList"
+    style="@style/SCREEN">
 
 
 </androidx.recyclerview.widget.RecyclerView>

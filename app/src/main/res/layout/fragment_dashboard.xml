@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.Search.DashboardFragment"
     app:menu="@menu/bottom_nav_menu"
+    style="@style/SCREEN"
     >
 
     <ProgressBar
