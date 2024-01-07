@@ -101,7 +101,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun searchResults(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar,language: String?) {
-        val film = SearchService.searchInterface.getMovies(searchbar.query.toString(), false, language, 1)
+        val film = SearchService.searchInterface.getMovies(searchbar.query.toString())
         film.enqueue(object : Callback<Data> {
             override fun onResponse(call: Call<Data>, response: Response<Data>) {
                 if (isAdded) {
