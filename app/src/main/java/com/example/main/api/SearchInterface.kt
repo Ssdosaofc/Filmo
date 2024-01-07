@@ -12,7 +12,8 @@ import retrofit2.http.Query
 interface SearchInterface {
 
     @GET("search/movie?api_key=$API_KEY")
-    fun getMovies(@Query("query") query: String): Call<Data>
+    fun getMovies(@Query("query") query: String, @Query("language") language: String?): Call<Data>
+
 }
 
 object SearchService{

@@ -7,19 +7,19 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Filter
 import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
-import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.main.R
 import com.example.main.Recycler.ViewAdapter
 import com.example.main.api.Data
 import com.example.main.api.SearchService
 import com.example.main.databinding.FragmentDashboardBinding
-import org.intellij.lang.annotations.Language
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,32 +48,6 @@ class DashboardFragment : Fragment() {
         val progressBar = binding.progress
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
-            //searchMovies(searchList, searchbar, progressBar,filter)
-
-            filter.setOnClickListener(object : OnClickListener {
-                override fun onClick(v: View?) {
-
-                    var dialog = FilterDialog(
-                        /*
-                        object : FilterListener {
-
-                        override fun onFilterApplied(language: String?) {
-
-                            if (language != null) {
-                                lang = language
-                                searchResults(searchList,searchbar,progressBar,lang)
-                            }
-
-
-                        }
-
-                    }*/
-                    )
-                    dialog.show(requireActivity().supportFragmentManager, "Filter Dialog")
-                }
-
-
-            })
 
             searchbar.setOnQueryTextListener(object : OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
@@ -89,6 +63,7 @@ class DashboardFragment : Fragment() {
                     val text = newText.toLowerCase(Locale.getDefault())
                     if (text.isNotEmpty()){
                         searchResults(searchList,searchbar,progressBar,null)
+
                     }
 
                     return false
@@ -101,7 +76,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun searchResults(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar,language: String?) {
-        val film = SearchService.searchInterface.getMovies(searchbar.query.toString())
+        val film = SearchService.searchInterface.getMovies(searchbar.query.toString(),language)
         film.enqueue(object : Callback<Data> {
             override fun onResponse(call: Call<Data>, response: Response<Data>) {
                 if (isAdded) {
@@ -124,6 +99,7 @@ class DashboardFragment : Fragment() {
             }
         })
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

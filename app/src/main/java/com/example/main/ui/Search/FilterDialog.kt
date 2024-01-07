@@ -4,12 +4,11 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
-import android.view.View.OnClickListener
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import android.widget.Filter
 import android.widget.PopupMenu
 import android.widget.PopupMenu.OnMenuItemClickListener
 import android.widget.Spinner
@@ -26,8 +25,7 @@ interface FilterListener {
 
  */
 
-class FilterDialog(//private val filterListener: FilterListener
-): AppCompatDialogFragment(), OnItemSelectedListener  {
+class FilterDialog(param: Filter.FilterListener) : AppCompatDialogFragment(), OnItemSelectedListener  {
 
     //private var lang: String? = null
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
