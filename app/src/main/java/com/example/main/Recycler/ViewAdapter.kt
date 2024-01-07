@@ -253,6 +253,7 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
                     if (position < films.size) {
                         films[position].isFavorite = isInMyFavourite
                         updateFavoriteButton(holder, position)
+                        notifyItemChanged(position)
                     }
                 }
 
@@ -334,4 +335,3 @@ fun addToFavourite(context: Context, movieID: String,title: String, poster: Stri
             Toast.makeText(context, "Could not Add to Favourites", Toast.LENGTH_SHORT).show()
         }
 }
-

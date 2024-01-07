@@ -66,7 +66,7 @@ class NotificationsFragment : Fragment() {
         favoritesRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 synchronized(list) {
-                    val beforeSize = list.size
+                    list.clear()
 
                     for (dataSnapshot: DataSnapshot in snapshot.children) {
                         val retrieve: Retrieve? = dataSnapshot.getValue(Retrieve::class.java)
@@ -74,9 +74,6 @@ class NotificationsFragment : Fragment() {
                             list.add(it)
                         }
                     }
-
-                    val afterSize = list.size
-                    Log.d("DataSize", "Before: $beforeSize, After: $afterSize")
 
                     adapter.notifyDataSetChanged()
                 }
