@@ -3,7 +3,9 @@ package com.example.main.Recycler
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -24,7 +26,7 @@ import com.google.firebase.database.ValueEventListener
 import java.util.UUID
 
 const val POSTER_BASE_URL = "https://image.tmdb.org/t/p/w342"
-class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAdapter.MovieViewHolder>() {
+class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAdapter.MovieViewHolder>() {
     var isInMyFavourite:Boolean = false
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -239,6 +241,10 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
             if (firebaseAuth.currentUser != null) {
                 checkIfFavourite(holder, film.id.toString(), position)
             }
+
+
+
+
         }
     }
 
@@ -291,8 +297,10 @@ class ViewAdapter(val context: Context, val films: List<Result>): Adapter<ViewAd
         }
     }
 
-
-
+    fun updateFilms(newFilms: List<Result>) {
+        films = newFilms
+        notifyDataSetChanged()
+    }
 
 }
 
@@ -335,3 +343,5 @@ fun addToFavourite(context: Context, movieID: String,title: String, poster: Stri
             Toast.makeText(context, "Could not Add to Favourites", Toast.LENGTH_SHORT).show()
         }
 }
+
+

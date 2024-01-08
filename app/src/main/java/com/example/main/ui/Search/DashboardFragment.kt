@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.main.R
 import com.example.main.Recycler.ViewAdapter
 import com.example.main.api.Data
+import com.example.main.api.Result
+import com.example.main.api.SearchInterface
 import com.example.main.api.SearchService
 import com.example.main.databinding.FragmentDashboardBinding
 import retrofit2.Call
@@ -29,6 +31,9 @@ class DashboardFragment : Fragment() {
     lateinit var adapter: ViewAdapter
 
     private var _binding: FragmentDashboardBinding? = null
+
+    var isSelected:Boolean = false
+    private var allFilmsList: List<Result> = emptyList()
 
     private val binding get() = _binding!!
 
@@ -46,6 +51,26 @@ class DashboardFragment : Fragment() {
         val searchbar: SearchView = binding.searchBar
         val filter:Button = binding.filter
         val progressBar = binding.progress
+        val action:Button = binding.Action
+        val adventure: Button = binding.Adventure
+        val animation: Button = binding.Animation
+        val comedy: Button = binding.Comedy
+        val crime: Button = binding.Crime
+        val documentary: Button = binding.Documentary
+        val drama: Button = binding.Drama
+        val family: Button = binding.Family
+        val fantasy: Button = binding.Fantasy
+        val history: Button = binding.History
+        val horror: Button = binding.Horror
+        val music: Button = binding.Music
+        val mystery: Button = binding.Mystery
+        val romance: Button = binding.Romance
+        val scienceFiction: Button = binding.ScienceFiction
+        val tvMovie: Button = binding.TVMovie
+        val thriller: Button = binding.Thriller
+        val war: Button = binding.War
+        val western: Button = binding.Western
+
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
@@ -60,7 +85,7 @@ class DashboardFragment : Fragment() {
                 }
 
                 override fun onQueryTextChange(newText: String): Boolean {
-                    val text = newText.toLowerCase(Locale.getDefault())
+                    val text = newText.lowercase(Locale.getDefault())
                     if (text.isNotEmpty()){
                         searchResults(searchList,searchbar,progressBar,null)
                     }
@@ -68,7 +93,28 @@ class DashboardFragment : Fragment() {
                     return false
                 }
 
+
             })
+
+            filterButton(adventure, 12)
+            filterButton(animation, 16)
+            filterButton(comedy, 35)
+            filterButton(crime, 80)
+            filterButton(documentary, 99)
+            filterButton(drama, 18)
+            filterButton(family, 10751)
+            filterButton(fantasy, 14)
+            filterButton(history, 36)
+            filterButton(horror, 27)
+            filterButton(music, 10402)
+            filterButton(mystery, 9648)
+            filterButton(romance, 10749)
+            filterButton(scienceFiction, 878)
+            filterButton(tvMovie, 10770)
+            filterButton(thriller, 53)
+            filterButton(war, 10752)
+            filterButton(western, 37)
+
         }
 
         return root
@@ -83,6 +129,7 @@ class DashboardFragment : Fragment() {
                     if (data != null) {
                         Log.d("Filmopedia", data.toString())
                         adapter = ViewAdapter(requireContext(), data.results)
+                        allFilmsList = data.results
                         searchList.adapter = adapter
                         searchList.layoutManager = LinearLayoutManager(requireContext())
                     }
@@ -98,6 +145,26 @@ class DashboardFragment : Fragment() {
             }
         })
     }
+
+    private fun filterButton(button: Button, id:Int){
+        button.setOnClickListener {
+            isSelected = !isSelected
+
+            if (isSelected) {
+                val actionGenreFilms = adapter.films.filter { it.genreIds.contains(id) }
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(actionGenreFilms)
+                    button.setBackgroundResource(R.drawable.filterbuttonselected)
+                }
+            } else {
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(allFilmsList)
+                    button.setBackgroundResource(R.drawable.filterbutton)
+                }
+            }
+        }
+    }
+
 
 
 
