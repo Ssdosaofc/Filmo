@@ -47,18 +47,23 @@ class HomeFragment : Fragment() {
         val film = MovieService.movieInterface.getMovies("en-US", 1)
         film.enqueue(object : Callback<Data> {
             override fun onResponse(call: Call<Data>, response: Response<Data>) {
-                val data = response.body()
-                if (data != null) {
-                    Log.d("Filmopedia", data.toString())
-                    adapter = ViewAdapter(requireContext(), data.results)
-                    popularList.adapter = adapter
-                    popularList.layoutManager = LinearLayoutManager(requireContext())
+                val context = context
+                if (context != null && isAdded) {
+                    val data = response.body()
+                    if (data != null) {
+                        Log.d("Filmopedia", data.toString())
+                        adapter = ViewAdapter(context, data.results)
+                        popularList.adapter = adapter
+                        popularList.layoutManager = LinearLayoutManager(context)
+                    }
                 }
 
             }
 
             override fun onFailure(call: Call<Data>, t: Throwable) {
-                Log.d("Filmopedia", "Error", t)
+                if (context != null && isAdded) {
+                    Log.d("Filmopedia", "Error", t)
+                }
             }
         })
     }

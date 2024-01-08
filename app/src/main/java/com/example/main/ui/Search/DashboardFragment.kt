@@ -49,7 +49,7 @@ class DashboardFragment : Fragment() {
         val root: View = binding.root
         val searchList: RecyclerView = binding.searchList
         val searchbar: SearchView = binding.searchBar
-        val filter:Button = binding.filter
+        //val filter:Button = binding.filter
         val progressBar = binding.progress
         val action:Button = binding.Action
         val adventure: Button = binding.Adventure
@@ -96,6 +96,7 @@ class DashboardFragment : Fragment() {
 
             })
 
+            filterButton(action, 28)
             filterButton(adventure, 12)
             filterButton(animation, 16)
             filterButton(comedy, 35)
