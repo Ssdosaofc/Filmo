@@ -63,7 +63,6 @@ class DashboardFragment : Fragment() {
                     val text = newText.toLowerCase(Locale.getDefault())
                     if (text.isNotEmpty()){
                         searchResults(searchList,searchbar,progressBar,null)
-
                     }
 
                     return false
@@ -99,6 +98,7 @@ class DashboardFragment : Fragment() {
             }
         })
     }
+
 
 
     override fun onDestroyView() {

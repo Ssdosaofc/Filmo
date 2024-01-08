@@ -28,12 +28,12 @@
         android:id="@+id/userdetails"
         android:layout_width="258dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:text="Hello World!"
         android:textColor="@color/five"
         android:textSize="12sp"
-        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toTopOf="@+id/nav_host_fragment_activity_main2"
-        app:layout_constraintEnd_toStartOf="@+id/logout"/>
+        app:layout_constraintStart_toStartOf="@+id/Filmo" />
 
     <TextView
         android:id="@+id/Filmo"
@@ -42,9 +42,11 @@
         android:text="Filmopedia"
         android:textColor="@color/five"
         android:textSize="20sp"
+        android:layout_marginStart="10sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/userdetails"
-        app:layout_constraintEnd_toStartOf="@+id/logout"/>
+        app:layout_constraintEnd_toStartOf="@+id/logout"
+        app:layout_constraintStart_toEndOf="@+id/switchCompat" />
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
@@ -100,25 +102,28 @@
         android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/myRectangleView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dark"
-        android:textColor="@color/white"
-        android:textSize="10dp"
-        android:layout_marginStart="10dp"
-        app:layout_constraintStart_toStartOf="@+id/myRectangleView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/Filmo"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Light"
+        android:layout_marginTop="2sp"
         android:textColor="@color/white"
-        android:textSize="10dp"
+        android:textSize="8dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="@+id/myRectangleView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
+        android:text="Dark"
+        android:textColor="@color/white"
+        android:textSize="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/myRectangleView"
         app:layout_constraintEnd_toEndOf="@+id/switchCompat"
         app:layout_constraintTop_toBottomOf="@+id/switchCompat" />

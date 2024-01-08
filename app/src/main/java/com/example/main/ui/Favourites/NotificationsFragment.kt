@@ -1,7 +1,6 @@
 package com.example.main.ui.Favourites
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +64,7 @@ class NotificationsFragment : Fragment() {
 
         favoritesRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                synchronized(list) {
+
                     list.clear()
 
                     for (dataSnapshot: DataSnapshot in snapshot.children) {
@@ -77,7 +76,7 @@ class NotificationsFragment : Fragment() {
 
                     adapter.notifyDataSetChanged()
                 }
-            }
+
 
             override fun onCancelled(error: DatabaseError) {
 

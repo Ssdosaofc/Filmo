@@ -2,14 +2,20 @@ package com.example.main
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.NightMode
+import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -29,6 +35,9 @@ class MainActivity2 : AppCompatActivity() {
 
     private lateinit var binding: ActivityMain2Binding
 
+    private lateinit var editor:SharedPreferences.Editor
+
+    var nightMode: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,6 +54,33 @@ class MainActivity2 : AppCompatActivity() {
         val progressBar: ProgressBar = findViewById(R.id.progress)
         val user =auth.currentUser
 
+        supportActionBar?.hide()
+        val switchCompat:SwitchCompat = findViewById(R.id.switchCompat)
+        val sharedPreferences:SharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE)
+        val nightMode = sharedPreferences.getBoolean("night", false)
+
+        if (nightMode){
+            switchCompat.isChecked
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+
+        switchCompat.setOnClickListener(object : OnClickListener {
+            override fun onClick(v: android.view.View?) {
+                if (nightMode){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    editor = sharedPreferences.edit()
+                    editor.putBoolean("night", false)
+                } else{
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    editor = sharedPreferences.edit()
+                    editor.putBoolean("night", true)
+                }
+                editor.apply()
+
+            }
+
+        })
+
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main2)
@@ -59,10 +95,11 @@ class MainActivity2 : AppCompatActivity() {
         if (user == null) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
+            //finish()
         } else {
             textView.text = user.email
         }
+
 
 
         button.setOnClickListener {
@@ -70,7 +107,7 @@ class MainActivity2 : AppCompatActivity() {
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish()
+            //finish()
             progressBar.visibility = android.view.View.GONE
         }
         setupActionBarWithNavController(navController, appBarConfiguration)
