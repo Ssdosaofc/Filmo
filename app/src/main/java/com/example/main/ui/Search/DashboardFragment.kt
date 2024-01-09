@@ -22,6 +22,7 @@ import com.example.main.api.Result
 import com.example.main.api.SearchInterface
 import com.example.main.api.SearchService
 import com.example.main.databinding.FragmentDashboardBinding
+import org.checkerframework.checker.units.qual.K
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,8 +33,14 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
+    private var searchList: RecyclerView? = null
+
     var isSelected:Boolean = false
     private var allFilmsList: List<Result> = emptyList()
+
+    private var selectedGenres: MutableSet<Int> = HashSet()
+    private var selectedPopularity: Int? = null
+
 
     private val binding get() = _binding!!
 
@@ -47,7 +54,7 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val searchList: RecyclerView = binding.searchList
+        searchList= binding.searchList
         val searchbar: SearchView = binding.searchBar
         //val filter:Button = binding.filter
         val progressBar = binding.progress
@@ -83,7 +90,7 @@ class DashboardFragment : Fragment() {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     if (isAdded) {
                         progressBar.visibility = View.VISIBLE
-                        searchResults(searchList,searchbar,progressBar,null)
+                        searchResults(searchList!!,searchbar,progressBar,null)
 
                     }
                     return false
@@ -92,7 +99,7 @@ class DashboardFragment : Fragment() {
                 override fun onQueryTextChange(newText: String): Boolean {
                     val text = newText.lowercase(Locale.getDefault())
                     if (text.isNotEmpty()){
-                        searchResults(searchList,searchbar,progressBar,null)
+                        searchResults(searchList!!,searchbar,progressBar,null)
                     }
 
                     return false
@@ -125,6 +132,7 @@ class DashboardFragment : Fragment() {
             popularityButton2(above500)
             popularityButton3(above100)
             popularityButton4(above0)
+
 
         }
 
@@ -251,8 +259,11 @@ class DashboardFragment : Fragment() {
 
 
 
+
+
     override fun onDestroyView() {
         super.onDestroyView()
+        searchList?.adapter = null
         _binding = null
     }
 }
