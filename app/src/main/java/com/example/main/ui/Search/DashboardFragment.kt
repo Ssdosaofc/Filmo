@@ -71,6 +71,11 @@ class DashboardFragment : Fragment() {
         val war: Button = binding.War
         val western: Button = binding.Western
 
+        val above1000: Button = binding.above1000
+        val above500: Button = binding.to1000
+        val above100: Button = binding.to500
+        val above0: Button = binding.to100
+
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
@@ -116,6 +121,11 @@ class DashboardFragment : Fragment() {
             filterButton(war, 10752)
             filterButton(western, 37)
 
+            popularityButton(above1000)
+            popularityButton2(above500)
+            popularityButton3(above100)
+            popularityButton4(above0)
+
         }
 
         return root
@@ -152,7 +162,26 @@ class DashboardFragment : Fragment() {
             isSelected = !isSelected
 
             if (isSelected) {
-                val actionGenreFilms = adapter.films.filter { it.genreIds.contains(id) }
+                val genreFilms = adapter.films.filter { it.genreIds.contains(id) }
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(genreFilms)
+                    button.setBackgroundResource(R.drawable.filterbuttonselected)
+                }
+            } else {
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(allFilmsList)
+                    button.setBackgroundResource(R.drawable.filterbutton)
+                }
+            }
+        }
+    }
+
+    private fun popularityButton(button: Button){
+        button.setOnClickListener {
+            isSelected = !isSelected
+
+            if (isSelected) {
+                val actionGenreFilms = adapter.films.filter { it.popularity > 1000}
                 requireActivity().runOnUiThread {
                     adapter.updateFilms(actionGenreFilms)
                     button.setBackgroundResource(R.drawable.filterbuttonselected)
@@ -165,7 +194,60 @@ class DashboardFragment : Fragment() {
             }
         }
     }
+    private fun popularityButton2(button: Button){
+        button.setOnClickListener {
+            isSelected = !isSelected
 
+            if (isSelected) {
+                val actionGenreFilms = adapter.films.filter { it.popularity in 500.0..1000.0 }
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(actionGenreFilms)
+                    button.setBackgroundResource(R.drawable.filterbuttonselected)
+                }
+            } else {
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(allFilmsList)
+                    button.setBackgroundResource(R.drawable.filterbutton)
+                }
+            }
+        }
+    }
+    private fun popularityButton3(button: Button){
+        button.setOnClickListener {
+            isSelected = !isSelected
+
+            if (isSelected) {
+                val actionGenreFilms = adapter.films.filter { it.popularity in 100.0..500.0 }
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(actionGenreFilms)
+                    button.setBackgroundResource(R.drawable.filterbuttonselected)
+                }
+            } else {
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(allFilmsList)
+                    button.setBackgroundResource(R.drawable.filterbutton)
+                }
+            }
+        }
+    }
+    private fun popularityButton4(button: Button){
+        button.setOnClickListener {
+            isSelected = !isSelected
+
+            if (isSelected) {
+                val actionGenreFilms = adapter.films.filter { it.popularity < 100.0}
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(actionGenreFilms)
+                    button.setBackgroundResource(R.drawable.filterbuttonselected)
+                }
+            } else {
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(allFilmsList)
+                    button.setBackgroundResource(R.drawable.filterbutton)
+                }
+            }
+        }
+    }
 
 
 
