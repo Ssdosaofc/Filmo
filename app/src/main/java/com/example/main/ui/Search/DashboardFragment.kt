@@ -78,12 +78,6 @@ class DashboardFragment : Fragment() {
         val war: Button = binding.War
         val western: Button = binding.Western
 
-        val above1000: Button = binding.above1000
-        val above500: Button = binding.to1000
-        val above100: Button = binding.to500
-        val above0: Button = binding.to100
-
-
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
             searchbar.setOnQueryTextListener(object : OnQueryTextListener {
