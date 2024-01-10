@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Filter
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
@@ -35,12 +36,27 @@ class DashboardFragment : Fragment() {
 
     private var searchList: RecyclerView? = null
 
-    var isSelected:Boolean = false
     private var allFilmsList: List<Result> = emptyList()
 
-    private var selectedGenres: MutableSet<Int> = HashSet()
-    private var selectedPopularity: Int? = null
-
+    var isActionSelected: Boolean = false
+    var isAdventureSelected: Boolean = false
+    var isAnimationSelected: Boolean = false
+    var isComedySelected: Boolean = false
+    var isCrimeSelected: Boolean = false
+    var isDocumentarySelected: Boolean = false
+    var isDramaSelected: Boolean = false
+    var isFamilySelected: Boolean = false
+    var isFantasySelected: Boolean = false
+    var isHistorySelected: Boolean = false
+    var isHorrorSelected: Boolean = false
+    var isMusicSelected: Boolean = false
+    var isMysterySelected: Boolean = false
+    var isRomanceSelected: Boolean = false
+    var isScienceFictionSelected: Boolean = false
+    var isTVMovieSelected: Boolean = false
+    var isThrillerSelected: Boolean = false
+    var isWarSelected: Boolean = false
+    var isWesternSelected: Boolean = false
 
     private val binding get() = _binding!!
 
@@ -77,6 +93,7 @@ class DashboardFragment : Fragment() {
         val thriller: Button = binding.Thriller
         val war: Button = binding.War
         val western: Button = binding.Western
+        val actionText: String = binding.Action.text.toString()
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
@@ -102,25 +119,25 @@ class DashboardFragment : Fragment() {
 
             })
 
-            filterButton(action, 28)
-            filterButton(adventure, 12)
-            filterButton(animation, 16)
-            filterButton(comedy, 35)
-            filterButton(crime, 80)
-            filterButton(documentary, 99)
-            filterButton(drama, 18)
-            filterButton(family, 10751)
-            filterButton(fantasy, 14)
-            filterButton(history, 36)
-            filterButton(horror, 27)
-            filterButton(music, 10402)
-            filterButton(mystery, 9648)
-            filterButton(romance, 10749)
-            filterButton(scienceFiction, 878)
-            filterButton(tvMovie, 10770)
-            filterButton(thriller, 53)
-            filterButton(war, 10752)
-            filterButton(western, 37)
+            filterButton(action, 28, isActionSelected)
+            filterButton(adventure, 12, isAdventureSelected)
+            filterButton(animation, 16, isAnimationSelected)
+            filterButton(comedy, 35, isComedySelected)
+            filterButton(crime, 80, isCrimeSelected)
+            filterButton(documentary, 99, isDocumentarySelected)
+            filterButton(drama, 18, isDramaSelected)
+            filterButton(family, 10751, isFamilySelected)
+            filterButton(fantasy, 14, isFantasySelected)
+            filterButton(history, 36, isHistorySelected)
+            filterButton(horror, 27, isHorrorSelected)
+            filterButton(music, 10402, isMusicSelected)
+            filterButton(mystery, 9648, isMysterySelected)
+            filterButton(romance, 10749, isRomanceSelected)
+            filterButton(scienceFiction, 878, isScienceFictionSelected)
+            filterButton(tvMovie, 10770, isTVMovieSelected)
+            filterButton(thriller, 53, isThrillerSelected)
+            filterButton(war, 10752, isWarSelected)
+            filterButton(western, 37, isWesternSelected)
 
         }
 
@@ -153,33 +170,13 @@ class DashboardFragment : Fragment() {
         })
     }
 
-    private fun filterButton(button: Button, id:Int){
+    private fun filterButton(button: Button, id:Int, isSelected: Boolean){
         button.setOnClickListener {
-            isSelected = !isSelected
 
             if (isSelected) {
                 val genreFilms = adapter.films.filter { it.genreIds.contains(id) }
                 requireActivity().runOnUiThread {
                     adapter.updateFilms(genreFilms)
-                    button.setBackgroundResource(R.drawable.filterbuttonselected)
-                }
-            } else {
-                requireActivity().runOnUiThread {
-                    adapter.updateFilms(allFilmsList)
-                    button.setBackgroundResource(R.drawable.filterbutton)
-                }
-            }
-        }
-    }
-
-    private fun popularityButton(button: Button){
-        button.setOnClickListener {
-            isSelected = !isSelected
-
-            if (isSelected) {
-                val actionGenreFilms = adapter.films.filter { it.popularity > 1000}
-                requireActivity().runOnUiThread {
-                    adapter.updateFilms(actionGenreFilms)
                     button.setBackgroundResource(R.drawable.filterbuttonselected)
                 }
             } else {
