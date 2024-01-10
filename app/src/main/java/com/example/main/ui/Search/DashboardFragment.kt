@@ -128,12 +128,6 @@ class DashboardFragment : Fragment() {
             filterButton(war, 10752)
             filterButton(western, 37)
 
-            popularityButton(above1000)
-            popularityButton2(above500)
-            popularityButton3(above100)
-            popularityButton4(above0)
-
-
         }
 
         return root
@@ -202,64 +196,6 @@ class DashboardFragment : Fragment() {
             }
         }
     }
-    private fun popularityButton2(button: Button){
-        button.setOnClickListener {
-            isSelected = !isSelected
-
-            if (isSelected) {
-                val actionGenreFilms = adapter.films.filter { it.popularity in 500.0..1000.0 }
-                requireActivity().runOnUiThread {
-                    adapter.updateFilms(actionGenreFilms)
-                    button.setBackgroundResource(R.drawable.filterbuttonselected)
-                }
-            } else {
-                requireActivity().runOnUiThread {
-                    adapter.updateFilms(allFilmsList)
-                    button.setBackgroundResource(R.drawable.filterbutton)
-                }
-            }
-        }
-    }
-    private fun popularityButton3(button: Button){
-        button.setOnClickListener {
-            isSelected = !isSelected
-
-            if (isSelected) {
-                val actionGenreFilms = adapter.films.filter { it.popularity in 100.0..500.0 }
-                requireActivity().runOnUiThread {
-                    adapter.updateFilms(actionGenreFilms)
-                    button.setBackgroundResource(R.drawable.filterbuttonselected)
-                }
-            } else {
-                requireActivity().runOnUiThread {
-                    adapter.updateFilms(allFilmsList)
-                    button.setBackgroundResource(R.drawable.filterbutton)
-                }
-            }
-        }
-    }
-    private fun popularityButton4(button: Button){
-        button.setOnClickListener {
-            isSelected = !isSelected
-
-            if (isSelected) {
-                val actionGenreFilms = adapter.films.filter { it.popularity < 100.0}
-                requireActivity().runOnUiThread {
-                    adapter.updateFilms(actionGenreFilms)
-                    button.setBackgroundResource(R.drawable.filterbuttonselected)
-                }
-            } else {
-                requireActivity().runOnUiThread {
-                    adapter.updateFilms(allFilmsList)
-                    button.setBackgroundResource(R.drawable.filterbutton)
-                }
-            }
-        }
-    }
-
-
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()
