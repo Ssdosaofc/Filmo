@@ -74,25 +74,25 @@ class DashboardFragment : Fragment() {
         val searchbar: SearchView = binding.searchBar
         //val filter:Button = binding.filter
         val progressBar = binding.progress
-        val action:Button = binding.Action
-        val adventure: Button = binding.Adventure
-        val animation: Button = binding.Animation
-        val comedy: Button = binding.Comedy
-        val crime: Button = binding.Crime
-        val documentary: Button = binding.Documentary
-        val drama: Button = binding.Drama
-        val family: Button = binding.Family
-        val fantasy: Button = binding.Fantasy
-        val history: Button = binding.History
-        val horror: Button = binding.Horror
-        val music: Button = binding.Music
-        val mystery: Button = binding.Mystery
-        val romance: Button = binding.Romance
-        val scienceFiction: Button = binding.ScienceFiction
-        val tvMovie: Button = binding.TVMovie
-        val thriller: Button = binding.Thriller
-        val war: Button = binding.War
-        val western: Button = binding.Western
+        val action: Button = binding.Action.apply { tag = "Action" }
+        val adventure: Button = binding.Adventure.apply { tag = "Adventure" }
+        val animation: Button = binding.Animation.apply { tag = "Animation" }
+        val comedy: Button = binding.Comedy.apply { tag = "Comedy" }
+        val crime: Button = binding.Crime.apply { tag = "Crime" }
+        val documentary: Button = binding.Documentary.apply { tag = "Documentary" }
+        val drama: Button = binding.Drama.apply { tag = "Drama" }
+        val family: Button = binding.Family.apply { tag = "Family" }
+        val fantasy: Button = binding.Fantasy.apply { tag = "Fantasy" }
+        val history: Button = binding.History.apply { tag = "History" }
+        val horror: Button = binding.Horror.apply { tag = "Horror" }
+        val music: Button = binding.Music.apply { tag = "Music" }
+        val mystery: Button = binding.Mystery.apply { tag = "Mystery" }
+        val romance: Button = binding.Romance.apply { tag = "Romance" }
+        val scienceFiction: Button = binding.ScienceFiction.apply { tag = "ScienceFiction" }
+        val tvMovie: Button = binding.TVMovie.apply { tag = "TVMovie" }
+        val thriller: Button = binding.Thriller.apply { tag = "Thriller" }
+        val war: Button = binding.War.apply { tag = "War" }
+        val western: Button = binding.Western.apply { tag = "Western" }
         val actionText: String = binding.Action.text.toString()
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
@@ -141,6 +141,8 @@ class DashboardFragment : Fragment() {
 
         }
 
+
+
         return root
     }
 
@@ -170,8 +172,31 @@ class DashboardFragment : Fragment() {
         })
     }
 
-    private fun filterButton(button: Button, id:Int, isSelected: Boolean){
+    private fun filterButton(button: Button, id: Int, isSelected: Boolean) {
         button.setOnClickListener {
+            val tag = button.tag as String
+            when (tag) {
+                "Action" -> isActionSelected = !isActionSelected
+                "Adventure" -> isAdventureSelected = !isAdventureSelected
+                "Animation" -> isAnimationSelected = !isAnimationSelected
+                "Comedy" -> isComedySelected = !isComedySelected
+                "Crime" -> isCrimeSelected = !isCrimeSelected
+                "Documentary" -> isDocumentarySelected = !isDocumentarySelected
+                "Drama" -> isDramaSelected = !isDramaSelected
+                "Family" -> isFamilySelected = !isFamilySelected
+                "Fantasy" -> isFantasySelected = !isFantasySelected
+                "History" -> isHistorySelected = !isHistorySelected
+                "Horror" -> isHorrorSelected = !isHorrorSelected
+                "Music" -> isMusicSelected = !isMusicSelected
+                "Mystery" -> isMysterySelected = !isMysterySelected
+                "Romance" -> isRomanceSelected = !isRomanceSelected
+                "ScienceFiction" -> isScienceFictionSelected = !isScienceFictionSelected
+                "TVMovie" -> isTVMovieSelected = !isTVMovieSelected
+                "Thriller" -> isThrillerSelected = !isThrillerSelected
+                "War" -> isWarSelected = !isWarSelected
+                "Western" -> isWesternSelected = !isWesternSelected
+            }
+
 
             if (isSelected) {
                 val genreFilms = adapter.films.filter { it.genreIds.contains(id) }
