@@ -39,24 +39,6 @@ class DashboardFragment : Fragment() {
     private var allFilmsList: List<Result> = emptyList()
 
     var isActionSelected: Boolean = false
-    var isAdventureSelected: Boolean = false
-    var isAnimationSelected: Boolean = false
-    var isComedySelected: Boolean = false
-    var isCrimeSelected: Boolean = false
-    var isDocumentarySelected: Boolean = false
-    var isDramaSelected: Boolean = false
-    var isFamilySelected: Boolean = false
-    var isFantasySelected: Boolean = false
-    var isHistorySelected: Boolean = false
-    var isHorrorSelected: Boolean = false
-    var isMusicSelected: Boolean = false
-    var isMysterySelected: Boolean = false
-    var isRomanceSelected: Boolean = false
-    var isScienceFictionSelected: Boolean = false
-    var isTVMovieSelected: Boolean = false
-    var isThrillerSelected: Boolean = false
-    var isWarSelected: Boolean = false
-    var isWesternSelected: Boolean = false
 
     private val binding get() = _binding!!
 
@@ -74,26 +56,26 @@ class DashboardFragment : Fragment() {
         val searchbar: SearchView = binding.searchBar
         //val filter:Button = binding.filter
         val progressBar = binding.progress
-        val action: Button = binding.Action.apply { tag = "Action" }
-        val adventure: Button = binding.Adventure.apply { tag = "Adventure" }
-        val animation: Button = binding.Animation.apply { tag = "Animation" }
-        val comedy: Button = binding.Comedy.apply { tag = "Comedy" }
-        val crime: Button = binding.Crime.apply { tag = "Crime" }
-        val documentary: Button = binding.Documentary.apply { tag = "Documentary" }
-        val drama: Button = binding.Drama.apply { tag = "Drama" }
-        val family: Button = binding.Family.apply { tag = "Family" }
-        val fantasy: Button = binding.Fantasy.apply { tag = "Fantasy" }
-        val history: Button = binding.History.apply { tag = "History" }
-        val horror: Button = binding.Horror.apply { tag = "Horror" }
-        val music: Button = binding.Music.apply { tag = "Music" }
-        val mystery: Button = binding.Mystery.apply { tag = "Mystery" }
-        val romance: Button = binding.Romance.apply { tag = "Romance" }
-        val scienceFiction: Button = binding.ScienceFiction.apply { tag = "ScienceFiction" }
-        val tvMovie: Button = binding.TVMovie.apply { tag = "TVMovie" }
-        val thriller: Button = binding.Thriller.apply { tag = "Thriller" }
-        val war: Button = binding.War.apply { tag = "War" }
-        val western: Button = binding.Western.apply { tag = "Western" }
-        val actionText: String = binding.Action.text.toString()
+        val action: Button = binding.Action
+        val adventure: Button = binding.Adventure
+        val animation: Button = binding.Animation
+        val comedy: Button = binding.Comedy
+        val crime: Button = binding.Crime
+        val documentary: Button = binding.Documentary
+        val drama: Button = binding.Drama
+        val family: Button = binding.Family
+        val fantasy: Button = binding.Fantasy
+        val history: Button = binding.History
+        val horror: Button = binding.Horror
+        val music: Button = binding.Music
+        val mystery: Button = binding.Mystery
+        val romance: Button = binding.Romance
+        val scienceFiction: Button = binding.ScienceFiction
+        val tvMovie: Button = binding.TVMovie
+        val thriller: Button = binding.Thriller
+        val war: Button = binding.War
+        val western: Button = binding.Western
+//      val actionText: String = binding.Action.text.toString()
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
@@ -119,25 +101,25 @@ class DashboardFragment : Fragment() {
 
             })
 
-            filterButton(action, 28, isActionSelected)
-            filterButton(adventure, 12, isAdventureSelected)
-            filterButton(animation, 16, isAnimationSelected)
-            filterButton(comedy, 35, isComedySelected)
-            filterButton(crime, 80, isCrimeSelected)
-            filterButton(documentary, 99, isDocumentarySelected)
-            filterButton(drama, 18, isDramaSelected)
-            filterButton(family, 10751, isFamilySelected)
-            filterButton(fantasy, 14, isFantasySelected)
-            filterButton(history, 36, isHistorySelected)
-            filterButton(horror, 27, isHorrorSelected)
-            filterButton(music, 10402, isMusicSelected)
-            filterButton(mystery, 9648, isMysterySelected)
-            filterButton(romance, 10749, isRomanceSelected)
-            filterButton(scienceFiction, 878, isScienceFictionSelected)
-            filterButton(tvMovie, 10770, isTVMovieSelected)
-            filterButton(thriller, 53, isThrillerSelected)
-            filterButton(war, 10752, isWarSelected)
-            filterButton(western, 37, isWesternSelected)
+            filterButton(action, 28)
+            filterButton(adventure, 12)
+            filterButton(animation, 16)
+            filterButton(comedy, 35)
+            filterButton(crime, 80)
+            filterButton(documentary, 99)
+            filterButton(drama, 18)
+            filterButton(family, 10751)
+            filterButton(fantasy, 14)
+            filterButton(history, 36)
+            filterButton(horror, 27)
+            filterButton(music, 10402)
+            filterButton(mystery, 9648)
+            filterButton(romance, 10749)
+            filterButton(scienceFiction, 878)
+            filterButton(tvMovie, 10770)
+            filterButton(thriller, 53)
+            filterButton(war, 10752)
+            filterButton(western, 37)
 
         }
 
@@ -172,39 +154,21 @@ class DashboardFragment : Fragment() {
         })
     }
 
-    private fun filterButton(button: Button, id: Int, isSelected: Boolean) {
+    private fun filterButton(button: Button, id: Int) {
         button.setOnClickListener {
-            val tag = button.tag as String
-            when (tag) {
-                "Action" -> isActionSelected = !isActionSelected
-                "Adventure" -> isAdventureSelected = !isAdventureSelected
-                "Animation" -> isAnimationSelected = !isAnimationSelected
-                "Comedy" -> isComedySelected = !isComedySelected
-                "Crime" -> isCrimeSelected = !isCrimeSelected
-                "Documentary" -> isDocumentarySelected = !isDocumentarySelected
-                "Drama" -> isDramaSelected = !isDramaSelected
-                "Family" -> isFamilySelected = !isFamilySelected
-                "Fantasy" -> isFantasySelected = !isFantasySelected
-                "History" -> isHistorySelected = !isHistorySelected
-                "Horror" -> isHorrorSelected = !isHorrorSelected
-                "Music" -> isMusicSelected = !isMusicSelected
-                "Mystery" -> isMysterySelected = !isMysterySelected
-                "Romance" -> isRomanceSelected = !isRomanceSelected
-                "ScienceFiction" -> isScienceFictionSelected = !isScienceFictionSelected
-                "TVMovie" -> isTVMovieSelected = !isTVMovieSelected
-                "Thriller" -> isThrillerSelected = !isThrillerSelected
-                "War" -> isWarSelected = !isWarSelected
-                "Western" -> isWesternSelected = !isWesternSelected
-            }
+            isActionSelected = !isActionSelected
 
 
-            if (isSelected) {
+
+            if (isActionSelected) {
                 val genreFilms = adapter.films.filter { it.genreIds.contains(id) }
+                Log.d("Filmopedia", "Filtered Films: ${genreFilms.size}")
                 requireActivity().runOnUiThread {
                     adapter.updateFilms(genreFilms)
                     button.setBackgroundResource(R.drawable.filterbuttonselected)
                 }
             } else {
+                Log.d("Filmopedia", "Showing All Films")
                 requireActivity().runOnUiThread {
                     adapter.updateFilms(allFilmsList)
                     button.setBackgroundResource(R.drawable.filterbutton)
