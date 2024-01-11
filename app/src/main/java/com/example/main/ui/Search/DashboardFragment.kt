@@ -128,16 +128,10 @@ class DashboardFragment : Fragment() {
                             }
                         }
                     }
-
                     return false
                 }
-
-
             })
-
         }
-
-
 
         return root
     }
