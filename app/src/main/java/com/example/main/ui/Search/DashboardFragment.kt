@@ -103,17 +103,19 @@ class DashboardFragment : Fragment() {
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
+            if (!filmsLoaded) {
+                buttonIdPairs.forEach { (button, id) ->
+                    filterButton(button, id)
+                }
+                filmsLoaded = true
+            }
+
             searchbar.setOnQueryTextListener(object : OnQueryTextListener {
 
                 override fun onQueryTextSubmit(query: String): Boolean {
                     if (isAdded) {
                         progressBar.visibility = View.VISIBLE
                         searchResults(searchList!!,searchbar,progressBar,null)
-                        if (filmsLoaded) {
-                            buttonIdPairs.forEach { (button, id) ->
-                                filterButton(button, id)
-                            }
-                        }
                     }
                     return false
                 }
@@ -122,11 +124,6 @@ class DashboardFragment : Fragment() {
                     val text = newText.lowercase(Locale.getDefault())
                     if (text.isNotEmpty()){
                         searchResults(searchList!!,searchbar,progressBar,null)
-                        if (filmsLoaded) {
-                            buttonIdPairs.forEach { (button, id) ->
-                                filterButton(button, id)
-                            }
-                        }
                     }
                     return false
                 }
