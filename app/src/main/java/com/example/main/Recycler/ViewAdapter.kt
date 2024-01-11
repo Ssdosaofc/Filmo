@@ -269,7 +269,9 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
             })
 
         holder.favButton.setOnClickListener {
-            toggleFavoriteStatus(holder, position)
+            if (position != RecyclerView.NO_POSITION && position < films.size) {
+                toggleFavoriteStatus(holder, position)
+            }
         }
     }
 
