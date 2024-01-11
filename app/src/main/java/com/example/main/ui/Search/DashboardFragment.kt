@@ -163,18 +163,20 @@ class DashboardFragment : Fragment() {
 
     private fun filterButton(button: Button, id: Int) {
         button.setOnClickListener {
-            if (selectedButton == null || selectedButton != button) {
-                selectedButton?.setBackgroundResource(R.drawable.filterbutton)
-                button.setBackgroundResource(R.drawable.filterbuttonselected)
-                selectedButton = button
+            if (::adapter.isInitialized) {
+                if (selectedButton == null || selectedButton != button) {
+                    selectedButton?.setBackgroundResource(R.drawable.filterbutton)
+                    button.setBackgroundResource(R.drawable.filterbuttonselected)
+                    selectedButton = button
 
-                val genreFilms = allFilmsList.filter { it.genreIds.isNotEmpty() && it.genreIds[0] == id }
-                adapter.updateFilms(genreFilms)
-            } else {
-                selectedButton?.setBackgroundResource(R.drawable.filterbutton)
-                selectedButton = null
+                    val genreFilms = allFilmsList.filter { it.genreIds.isNotEmpty() && it.genreIds[0] == id }
+                    adapter.updateFilms(genreFilms)
+                } else {
+                    selectedButton?.setBackgroundResource(R.drawable.filterbutton)
+                    selectedButton = null
 
-                adapter.updateFilms(allFilmsList)
+                    adapter.updateFilms(allFilmsList)
+                }
             }
         }
     }    override fun onDestroyView() {
