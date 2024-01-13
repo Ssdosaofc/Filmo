@@ -236,6 +236,10 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
             if (firebaseAuth.currentUser != null) {
                 checkIfFavourite(holder, film.movieID, position)
             }
+
+            holder.favButton.setOnClickListener {
+                toggleFavoriteStatus(holder, position)
+            }
         }
     }
 
@@ -258,9 +262,7 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
                 }
             })
 
-        holder.favButton.setOnClickListener {
-            toggleFavoriteStatus(holder, position)
-        }
+
     }
 
     private fun updateFavoriteButton(holder: MovieViewHolder, position: Int) {

@@ -1,5 +1,6 @@
 package com.example.main.ui.Search
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,12 +35,16 @@ class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 
-    private var searchList: RecyclerView? = null
+    private lateinit var searchList: RecyclerView
 
     private var allFilmsList: List<Result> = emptyList()
 
     private var selectedButton: Button? = null
     private var filmsLoaded: Boolean = false
+
+    private var isActionSelected: Boolean = false
+
+    private lateinit var buttonIdPairs: List<Pair<Button, Int>>
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -52,10 +57,17 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        searchList= binding.searchList
+
+        searchList = binding.searchList
+        searchList.itemAnimator = null
+
+        adapter = ViewAdapter(requireContext(), emptyList())
+        searchList.adapter = adapter
+        searchList.layoutManager = LinearLayoutManager(requireContext())
+
         val searchbar: SearchView = binding.searchBar
         //val filter:Button = binding.filter
-        val progressBar = binding.progress
+        //val progressBar = binding.progress
         val action: Button = binding.Action
         val adventure: Button = binding.Adventure
         val animation: Button = binding.Animation
@@ -77,7 +89,7 @@ class DashboardFragment : Fragment() {
         val western: Button = binding.Western
 //      val actionText: String = binding.Action.text.toString()
 
-        val buttonIdPairs = listOf(
+        buttonIdPairs = listOf(
             action to 28,
             adventure to 12,
             animation to 16,
@@ -103,7 +115,7 @@ class DashboardFragment : Fragment() {
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
-            if (!filmsLoaded) {
+            if (!filmsLoaded && isAdded) {
                 buttonIdPairs.forEach { (button, id) ->
                     filterButton(button, id)
                 }
@@ -114,8 +126,12 @@ class DashboardFragment : Fragment() {
 
                 override fun onQueryTextSubmit(query: String): Boolean {
                     if (isAdded) {
-                        progressBar.visibility = View.VISIBLE
-                        searchResults(searchList!!,searchbar,progressBar,null)
+                        //binding?.progress?.visibility = View.VISIBLE
+                        searchResults(
+                            searchList,searchbar,
+                            //progressBar,
+                            null)
+
                     }
                     return false
                 }
@@ -123,7 +139,10 @@ class DashboardFragment : Fragment() {
                 override fun onQueryTextChange(newText: String): Boolean {
                     val text = newText.lowercase(Locale.getDefault())
                     if (text.isNotEmpty()){
-                        searchResults(searchList!!,searchbar,progressBar,null)
+                        searchResults(
+                            searchList,searchbar,
+                            //progressBar,
+                            null)
                     }
                     return false
                 }
@@ -133,7 +152,15 @@ class DashboardFragment : Fragment() {
         return root
     }
 
-    private fun searchResults(searchList: RecyclerView, searchbar: SearchView, progressBar: ProgressBar,language: String?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        adapter = ViewAdapter(requireContext(), emptyList())
+        searchList.adapter = adapter
+    }
+
+    private fun searchResults(searchList: RecyclerView, searchbar: SearchView,
+                              //progressBar: ProgressBar,
+                              language: String?) {
         val film = SearchService.searchInterface.getMovies(searchbar.query.toString(),language)
         film.enqueue(object : Callback<Data> {
             override fun onResponse(call: Call<Data>, response: Response<Data>) {
@@ -141,21 +168,27 @@ class DashboardFragment : Fragment() {
                     val data = response.body()
                     if (data != null) {
                         Log.d("Filmopedia", data.toString())
-                        adapter = ViewAdapter(requireContext(), data.results)
-                        allFilmsList = data.results
-                        searchList.adapter = adapter
-                        searchList.layoutManager = LinearLayoutManager(requireContext())
+
+                        adapter.updateFilms(data.results)
+
+                        searchList.let { recyclerView ->
+                            adapter.let {
+                                recyclerView.adapter = it
+                                recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                                filmsLoaded = true
+                            }
+                        }
 
                         filmsLoaded = true
                     }
-                    progressBar.visibility = View.GONE
+                    //progressBar?.visibility = View.GONE
                 }
             }
 
             override fun onFailure(call: Call<Data>, t: Throwable) {
                 if (isAdded) {
                     Log.d("Filmopedia", "Error", t)
-                    progressBar.visibility = View.GONE
+                    //progressBar.visibility = View.GONE
                 }
             }
         })
@@ -163,23 +196,42 @@ class DashboardFragment : Fragment() {
 
     private fun filterButton(button: Button, id: Int) {
         button.setOnClickListener {
-            if (::adapter.isInitialized) {
-                if (selectedButton == null || selectedButton != button) {
-                    selectedButton?.setBackgroundResource(R.drawable.filterbutton)
-                    button.setBackgroundResource(R.drawable.filterbuttonselected)
-                    selectedButton = button
+            if (button == selectedButton) {
+                selectedButton?.setBackgroundResource(R.drawable.filterbutton)
+                selectedButton = null
+                isActionSelected = false
+                updateMovies()
+            } else {
+                selectedButton?.setBackgroundResource(R.drawable.filterbutton)
+                isActionSelected = true
 
-                    val genreFilms = allFilmsList.filter { it.genreIds.isNotEmpty() && it.genreIds[0] == id }
-                    adapter.updateFilms(genreFilms)
+                button.setBackgroundResource(R.drawable.filterbuttonselected)
+                selectedButton = button
+
+                val genreFilms = if (isActionSelected) {
+                    adapter.films.filter { it.genreIds.contains(id) }
                 } else {
-                    selectedButton?.setBackgroundResource(R.drawable.filterbutton)
-                    selectedButton = null
+                    allFilmsList
+                }
 
-                    adapter.updateFilms(allFilmsList)
+                Log.d("Filmopedia", "Filtered Films: ${genreFilms.size}")
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(genreFilms)
                 }
             }
         }
-    }    override fun onDestroyView() {
+    }
+
+    private fun updateMovies() {
+        if (selectedButton == null) {
+            isActionSelected = false
+            requireActivity().runOnUiThread {
+                adapter.updateFilms(allFilmsList)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
         super.onDestroyView()
         searchList?.adapter = null
         _binding = null

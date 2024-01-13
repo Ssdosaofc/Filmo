@@ -1,6 +1,7 @@
 package com.example.main.Recycler
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -31,6 +32,7 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
     private lateinit var firebaseAuth: FirebaseAuth
 
     class MovieViewHolder(itemView: View): ViewHolder(itemView){
+
         var moviePoster = itemView.findViewById<ImageView>(R.id.movieimage)
         var movieTitle = itemView.findViewById<TextView>(R.id.movietitle)
         var movieDescriptiom = itemView.findViewById<TextView>(R.id.moviedetails)
@@ -53,7 +55,6 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val position = holder.adapterPosition
         if (position != RecyclerView.NO_POSITION && position < films.size) {
             val film = films[position]
 
@@ -242,8 +243,12 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
                 checkIfFavourite(holder, film.id.toString(), position)
             }
 
-
-
+            holder.favButton.setOnClickListener {
+                Log.d("ViewAdapter", "FavButton clicked for position: $position")
+                if (position != RecyclerView.NO_POSITION && position < films.size) {
+                    toggleFavoriteStatus(holder, position)
+                }
+            }
 
         }
     }
@@ -255,11 +260,11 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
             .child(movieID)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    isInMyFavourite = dataSnapshot.exists()
-                    if (position < films.size) {
+                    val isInMyFavourite = dataSnapshot.exists()
+                    if (position != RecyclerView.NO_POSITION && position < films.size) {
                         films[position].isFavorite = isInMyFavourite
                         updateFavoriteButton(holder, position)
-                        notifyItemChanged(position)
+                        notifyItemChanged(position) // Trigger refresh of the item
                     }
                 }
 
@@ -267,16 +272,11 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
                     // Handle error if needed
                 }
             })
-
-        holder.favButton.setOnClickListener {
-            if (position != RecyclerView.NO_POSITION && position < films.size) {
-                toggleFavoriteStatus(holder, position)
-            }
-        }
     }
 
+
     private fun updateFavoriteButton(holder: MovieViewHolder, position: Int) {
-        if (position < films.size) {
+        if (position != RecyclerView.NO_POSITION && position < films.size) {
             val movie = films[position]
 
             if (movie.isFavorite) {
@@ -288,21 +288,37 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
     }
 
     private fun toggleFavoriteStatus(holder: MovieViewHolder, position: Int) {
-        if (position < films.size) {
+        Log.d("ViewAdapter", "ToggleFavoriteStatus called for position: $position")
+        if (position >= 0 && position < films.size) {
             val movie = films[position]
 
             if (movie.isFavorite) {
                 removeFromFavourite(context, movie.id.toString())
             } else {
-                addToFavourite(context, movie.id.toString(), movie.title, movie.posterPath, movie.overview,movie.originalLanguage,movie.popularity.toString(), movie.genreIds[0])
+                if (movie.genreIds.isNotEmpty()) {
+                    movie.posterPath?.toString()?.let {
+                        addToFavourite(context, movie.id.toString(), movie.title,
+                            it, movie.overview, movie.originalLanguage,
+                            movie.popularity.toString(), movie.genreIds[0]
+                        )
+                    }
+                } else {
+                    Log.e("ViewAdapter", "GenreIds is empty for movie: ${movie.id}")
+                }
             }
+        } else {
+            Log.e("ViewAdapter", "Invalid position: $position, films size: ${films.size}")
         }
+
     }
 
+    @Synchronized
     fun updateFilms(newFilms: List<Result>) {
         films = newFilms
         notifyDataSetChanged()
     }
+
+
 
 }
 
@@ -322,22 +338,17 @@ fun removeFromFavourite(context: Context, movieID: String) {
         }
 }
 
-fun addToFavourite(context: Context, movieID: String,title: String, poster: String, overview: String,lang: String,pop: String, gen:Int) {
+data class movieDetails(val movieID: String, val title:String,val poster: String?,val overview: String,val lang: String,val pop: String,val gen:Int)
+
+fun addToFavourite(context: Context, movieID: String,title: String, poster: String?, overview: String,lang: String,pop: String, gen:Int) {
     val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
-    val hashMap: HashMap<String, Any> = HashMap()
-    hashMap["movieID"] = movieID
-    hashMap["title"] = title
-    hashMap["poster"] = poster
-    hashMap["overview"] = overview
-    hashMap["language"] = lang
-    hashMap["popularity"] = pop
-    hashMap["genre"] = gen
+    val movieDetails = movieDetails(movieID, title, poster, overview, lang, pop, gen)
 
     val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
     ref.child(firebaseAuth.uid.toString()).child("Favourites")
         .child(movieID)
-        .setValue(hashMap)
+        .setValue(movieDetails)
         .addOnSuccessListener {
             Toast.makeText(context, "Added to favourites", Toast.LENGTH_SHORT).show()
         }

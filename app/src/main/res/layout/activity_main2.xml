@@ -85,7 +85,7 @@
 
         app:navGraph="@navigation/mobile_navigation2" />
 
-    <ProgressBar
+    <!--<ProgressBar
         android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        android:visibility="invisible"/> -->
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchCompat"

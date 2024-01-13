@@ -51,7 +51,7 @@ class MainActivity2 : AppCompatActivity() {
         auth= FirebaseAuth.getInstance()
         val button = findViewById<Button>(R.id.logout)
         val textView = findViewById<TextView>(R.id.userdetails)
-        val progressBar: ProgressBar = findViewById(R.id.progress)
+        //val progressBar: ProgressBar = findViewById(R.id.progress)
         val user =auth.currentUser
 
         supportActionBar?.hide()
@@ -103,12 +103,12 @@ class MainActivity2 : AppCompatActivity() {
 
 
         button.setOnClickListener {
-            progressBar.visibility = android.view.View.VISIBLE
+            //progressBar.visibility = android.view.View.VISIBLE
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             //finish()
-            progressBar.visibility = android.view.View.GONE
+            //progressBar.visibility = android.view.View.GONE
         }
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
