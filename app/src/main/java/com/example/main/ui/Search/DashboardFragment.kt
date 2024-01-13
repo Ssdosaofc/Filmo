@@ -115,12 +115,7 @@ class DashboardFragment : Fragment() {
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
-            if (!filmsLoaded && isAdded) {
-                buttonIdPairs.forEach { (button, id) ->
-                    filterButton(button, id)
-                }
-                filmsLoaded = true
-            }
+
 
             searchbar.setOnQueryTextListener(object : OnQueryTextListener {
 
@@ -131,7 +126,13 @@ class DashboardFragment : Fragment() {
                             searchList,searchbar,
                             //progressBar,
                             null)
+                    }
 
+                    if (!filmsLoaded && isAdded) {
+                        buttonIdPairs.forEach { (button, id) ->
+                            filterButton(button, id)
+                        }
+                        filmsLoaded = true
                     }
                     return false
                 }
@@ -143,6 +144,13 @@ class DashboardFragment : Fragment() {
                             searchList,searchbar,
                             //progressBar,
                             null)
+                    }
+
+                    if (!filmsLoaded && isAdded) {
+                        buttonIdPairs.forEach { (button, id) ->
+                            filterButton(button, id)
+                        }
+                        filmsLoaded = true
                     }
                     return false
                 }
@@ -170,6 +178,8 @@ class DashboardFragment : Fragment() {
                         Log.d("Filmopedia", data.toString())
 
                         adapter.updateFilms(data.results)
+
+                        allFilmsList = data.results
 
                         searchList.let { recyclerView ->
                             adapter.let {
@@ -200,7 +210,17 @@ class DashboardFragment : Fragment() {
                 selectedButton?.setBackgroundResource(R.drawable.filterbutton)
                 selectedButton = null
                 isActionSelected = false
-                updateMovies()
+
+                val genreFilms = if (isActionSelected) {
+                    adapter.films.filter { it.genreIds.contains(id) }
+                } else {
+                    allFilmsList
+                }
+
+                Log.d("Filmopedia", "Filtered Films: ${genreFilms.size}")
+                requireActivity().runOnUiThread {
+                    adapter.updateFilms(genreFilms)
+                }
             } else {
                 selectedButton?.setBackgroundResource(R.drawable.filterbutton)
                 isActionSelected = true
@@ -221,19 +241,9 @@ class DashboardFragment : Fragment() {
             }
         }
     }
-
-    private fun updateMovies() {
-        if (selectedButton == null) {
-            isActionSelected = false
-            requireActivity().runOnUiThread {
-                adapter.updateFilms(allFilmsList)
-            }
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
-        searchList?.adapter = null
+        searchList.adapter = null
         _binding = null
     }
 }
