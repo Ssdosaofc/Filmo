@@ -296,11 +296,13 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
                 removeFromFavourite(context, movie.id.toString())
             } else {
                 if (movie.genreIds.isNotEmpty()) {
-                    movie.posterPath?.let {
+                    if (movie.posterPath != null) {
                         addToFavourite(context, movie.id.toString(), movie.title,
-                            it, movie.overview, movie.originalLanguage,
-                            movie.popularity.toString(), movie.genreIds[0]
+                            movie.posterPath, movie.overview, movie.originalLanguage,
+                            movie.popularity.toString(), movie.genreIds.getOrNull(0) ?: 0
                         )
+                    } else {
+                        Toast.makeText(context, "Can't add movie without poster to favorites", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     Log.e("ViewAdapter", "GenreIds is empty for movie: ${movie.id}")
