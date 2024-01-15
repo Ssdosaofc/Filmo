@@ -296,7 +296,7 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
                 removeFromFavourite(context, movie.id.toString())
             } else {
                 if (movie.genreIds.isNotEmpty()) {
-                    movie.posterPath?.toString()?.let {
+                    movie.posterPath?.let {
                         addToFavourite(context, movie.id.toString(), movie.title,
                             it, movie.overview, movie.originalLanguage,
                             movie.popularity.toString(), movie.genreIds[0]
@@ -306,6 +306,8 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
                     Log.e("ViewAdapter", "GenreIds is empty for movie: ${movie.id}")
                 }
             }
+
+            notifyItemChanged(position)
         } else {
             Log.e("ViewAdapter", "Invalid position: $position, films size: ${films.size}")
         }

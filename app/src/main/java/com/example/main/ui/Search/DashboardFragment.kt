@@ -115,7 +115,12 @@ class DashboardFragment : Fragment() {
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
 
-
+            if (!filmsLoaded && isAdded) {
+                buttonIdPairs.forEach { (button, id) ->
+                    filterButton(button, id)
+                }
+                filmsLoaded = true
+            }
 
             searchbar.setOnQueryTextListener(object : OnQueryTextListener {
 

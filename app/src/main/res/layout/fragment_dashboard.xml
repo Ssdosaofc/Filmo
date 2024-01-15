@@ -34,16 +34,16 @@
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchBar"
+        style="@style/SCREEN"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_margin="8dp"
-        style="@style/SCREEN"
-        app:queryHint="Search Movies"
         android:background="@drawable/search_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
 
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:queryHint="Search Movies" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -57,25 +57,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/list_item" />
 
+    <TextView
+        android:id="@+id/genret"
+        style="@style/TEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genres:"
+        app:layout_constraintBottom_toTopOf="@+id/searchList"
+        app:layout_constraintEnd_toStartOf="@+id/genre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBar" />
+
     <HorizontalScrollView
         android:id="@+id/genre"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/genret"
         app:layout_constraintTop_toBottomOf="@id/searchBar"
         android:fillViewport="true"
         android:layout_margin="5dp">
+
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Genres:"/>
 
             <Button
                 android:layout_width="100dp"
