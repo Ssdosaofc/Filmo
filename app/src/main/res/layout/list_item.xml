@@ -122,15 +122,14 @@
         app:layout_constraintStart_toEndOf="@+id/language"
         app:layout_constraintTop_toBottomOf="@+id/genres" />
 
-    <TextView
+    <ImageView
         android:id="@+id/popularity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        style="@style/TEXT"
 
-        android:text="Popularity-"
-        android:textSize="12dp"
+        android:background="@drawable/baseline_star_24"
+
         app:layout_constraintBottom_toTopOf="@+id/moviedetails"
         app:layout_constraintStart_toEndOf="@+id/movieimage"
         app:layout_constraintTop_toBottomOf="@+id/language"

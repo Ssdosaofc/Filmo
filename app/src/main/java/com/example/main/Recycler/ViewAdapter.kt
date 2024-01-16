@@ -62,7 +62,7 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
             holder.movieDescriptiom.text = film.overview
             holder.movieID.text = film.id.toString()
 
-            holder.pop.text = film.popularity.toString()
+            holder.pop.text = film.voteAverage.toString()
 
             if (film.originalLanguage.isNotEmpty()){
                 when (film.originalLanguage){

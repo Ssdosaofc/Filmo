@@ -52,9 +52,12 @@ class HomeFragment : Fragment() {
                     val data = response.body()
                     if (data != null) {
                         Log.d("Filmopedia", data.toString())
-                        adapter = ViewAdapter(context, data.results)
-                        popularList.adapter = adapter
-                        popularList.layoutManager = LinearLayoutManager(context)
+
+                        if (isAdded) {
+                            adapter = ViewAdapter(context, data.results)
+                            popularList.adapter = adapter
+                            popularList.layoutManager = LinearLayoutManager(context)
+                        }
                     }
                 }
 
