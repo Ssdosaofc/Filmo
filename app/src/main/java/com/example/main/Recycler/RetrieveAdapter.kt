@@ -1,6 +1,7 @@
 package com.example.main.Recycler
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,8 +58,12 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
             holder.movieTitle.text = film.title
             holder.movieDescriptiom.text = film.overview
             holder.movieID.text = film.movieID
+            holder.pop.text = film.popularity
 
-            if (film.originalLanguage.isNotEmpty()){
+            Log.d("OriginalLanguage", "Checking original language: ${film.originalLanguage}")
+
+
+            if (film.originalLanguage.isNotBlank()){
                 when (film.originalLanguage){
                     "an"->holder.lang.text = "Aragonese"
                     "ak"->holder.lang.text = "Akan"
@@ -200,11 +205,9 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
                     "sn"->holder.lang.text = "Shona"
                     "sr"->holder.lang.text = "Serbian"
                     "za"->holder.lang.text = "Zhuang"
-
                 }
-            }
 
-            holder.pop.text = film.popularity.toString()
+            }
 
             when (film.genre){
                 28 -> holder.gen.text = "Action"
