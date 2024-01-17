@@ -127,6 +127,7 @@ class DashboardFragment : Fragment() {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     if (isAdded) {
                         //binding?.progress?.visibility = View.VISIBLE
+                        clearAllFilters()
                         searchResults(
                             searchList,searchbar,
                             //progressBar,
@@ -145,6 +146,7 @@ class DashboardFragment : Fragment() {
                 override fun onQueryTextChange(newText: String): Boolean {
                     val text = newText.lowercase(Locale.getDefault())
                     if (text.isNotEmpty()){
+                        clearAllFilters()
                         searchResults(
                             searchList,searchbar,
                             //progressBar,
@@ -216,6 +218,44 @@ class DashboardFragment : Fragment() {
                 selectedButton = null
                 isActionSelected = false
 
+            } else {
+                selectedButton?.setBackgroundResource(R.drawable.filterbutton)
+                isActionSelected = true
+                button.setBackgroundResource(R.drawable.filterbuttonselected)
+                selectedButton = button
+            }
+
+            val genreFilms = if (isActionSelected) {
+                allFilmsList.filter { it.genreIds.contains(id) }
+            } else {
+                allFilmsList
+            }
+
+            Log.d("Filmopedia", "Filtered Films: ${genreFilms.size}")
+            requireActivity().runOnUiThread {
+                adapter.updateFilms(genreFilms)
+            }
+        }
+    }
+
+    private fun clearAllFilters() {
+        selectedButton?.setBackgroundResource(R.drawable.filterbutton)
+        selectedButton = null
+        isActionSelected = false
+
+        requireActivity().runOnUiThread {
+            adapter.updateFilms(allFilmsList)
+        }
+    }
+
+    /*
+    private fun filterButton(button: Button, id: Int) {
+        button.setOnClickListener {
+            if (button == selectedButton) {
+                selectedButton?.setBackgroundResource(R.drawable.filterbutton)
+                selectedButton = null
+                isActionSelected = false
+
                 val genreFilms = if (isActionSelected) {
                     adapter.films.filter { it.genreIds.contains(id) }
                 } else {
@@ -246,6 +286,8 @@ class DashboardFragment : Fragment() {
             }
         }
     }
+
+ */
     override fun onDestroyView() {
         super.onDestroyView()
         searchList.adapter = null
