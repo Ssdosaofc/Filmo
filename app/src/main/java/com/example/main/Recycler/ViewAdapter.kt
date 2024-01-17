@@ -264,7 +264,7 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
                     if (position != RecyclerView.NO_POSITION && position < films.size) {
                         films[position].isFavorite = isInMyFavourite
                         updateFavoriteButton(holder, position)
-                        notifyItemChanged(position) // Trigger refresh of the item
+                        notifyItemChanged(position)
                     }
                 }
 
@@ -299,7 +299,7 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
                     if (movie.posterPath != null) {
                         addToFavourite(context, movie.id.toString(), movie.title,
                             movie.posterPath, movie.overview, movie.originalLanguage,
-                            movie.popularity.toString(), movie.genreIds.getOrNull(0) ?: 0
+                            movie.voteAverage.toString(), movie.genreIds.getOrNull(0) ?: 0
                         )
                     } else {
                         Toast.makeText(context, "Can't add movie without poster to favorites", Toast.LENGTH_SHORT).show()

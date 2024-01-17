@@ -55,16 +55,13 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
         if (position != RecyclerView.NO_POSITION && position < films.size) {
             val film = films[position]
 
+
             holder.movieTitle.text = film.title
             holder.movieDescriptiom.text = film.overview
             holder.movieID.text = film.movieID
-            holder.pop.text = film.popularity
 
-            Log.d("OriginalLanguage", "Checking original language: ${film.originalLanguage}")
-
-
-            if (film.originalLanguage.isNotBlank()){
-                when (film.originalLanguage){
+            if (film.lang.isNotEmpty()){
+                when (film.lang){
                     "an"->holder.lang.text = "Aragonese"
                     "ak"->holder.lang.text = "Akan"
                     "cr"->holder.lang.text = "Cree"
@@ -205,11 +202,13 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
                     "sn"->holder.lang.text = "Shona"
                     "sr"->holder.lang.text = "Serbian"
                     "za"->holder.lang.text = "Zhuang"
-                }
 
+                }
             }
 
-            when (film.genre){
+            holder.pop.text = film.pop.toString()
+
+            when (film.gen){
                 28 -> holder.gen.text = "Action"
                 12 -> holder.gen.text = "Adventure"
                 16 -> holder.gen.text = "Animation"
@@ -287,7 +286,7 @@ class RetrieveAdapter(val context: Context, val films: List<Retrieve>): Adapter<
             if (movie.isFavorite) {
                 removeFromFavourite(context, movie.movieID)
             } else {
-                addToFavourite(context, movie.movieID, movie.title, movie.poster, movie.overview,movie.originalLanguage,movie.popularity.toString(),movie.genre)
+                addToFavourite(context, movie.movieID, movie.title, movie.poster, movie.overview,movie.lang,movie.pop.toString(),movie.gen)
             }
         }
     }

@@ -9,8 +9,8 @@ data class Retrieve(
     val poster: String="",
     val title: String="",
     val movieID: String="",
-    var originalLanguage: String="",
-    var popularity: String= "",
-    var genre: Int = 0,
+    var lang: String="",
+    var pop: String= "",
+    var gen: Int = 0,
     var isFavorite: Boolean = false
 )
