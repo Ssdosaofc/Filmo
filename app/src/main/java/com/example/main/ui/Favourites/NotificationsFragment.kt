@@ -24,6 +24,8 @@ class NotificationsFragment : Fragment() {
     lateinit var adapter: RetrieveAdapter
     var list = arrayListOf<Retrieve>()
 
+    private lateinit var favList: RecyclerView
+
     private var _binding: FragmentNotificationsBinding? = null
 
     private val binding get() = _binding!!
@@ -39,7 +41,7 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val favList: RecyclerView = binding.favList
+        favList = binding.favList
         ref = FirebaseDatabase.getInstance().getReference("Users")
 
         favList.setHasFixedSize(true)
@@ -86,6 +88,7 @@ class NotificationsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        favList.adapter = null
         _binding = null
     }
 

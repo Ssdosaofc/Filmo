@@ -20,6 +20,8 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     lateinit var adapter: ViewAdapter
 
+    private lateinit var popularList: RecyclerView
+
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -34,7 +36,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val popularList: RecyclerView = binding.popularList
+        popularList = binding.popularList
         homeViewModel.text.observe(viewLifecycleOwner) {
 
             getPopularMovies(popularList)
@@ -73,6 +75,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        popularList.adapter = null
         _binding = null
     }
 }
