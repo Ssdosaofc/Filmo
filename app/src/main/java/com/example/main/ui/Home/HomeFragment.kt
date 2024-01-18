@@ -39,13 +39,19 @@ class HomeFragment : Fragment() {
         popularList = binding.popularList
         homeViewModel.text.observe(viewLifecycleOwner) {
 
-            getPopularMovies(popularList)
+            popularList.postDelayed({
+                getPopularMovies(popularList)
+            }, 500)
+
+            //getPopularMovies(popularList)
 
         }
         return root
     }
 
     private fun getPopularMovies(popularList: RecyclerView) {
+//https://juliensalvi.medium.com/safe-delay-in-android-views-goodbye-handlers-hello-coroutines-cd47f53f0fbf
+
         val film = MovieService.movieInterface.getMovies("en-US", 1)
         film.enqueue(object : Callback<Data> {
             override fun onResponse(call: Call<Data>, response: Response<Data>) {
@@ -75,7 +81,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        popularList.adapter = null
+        //popularList.adapter = null
         _binding = null
     }
 }

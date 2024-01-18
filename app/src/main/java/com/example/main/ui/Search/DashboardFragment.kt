@@ -15,6 +15,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.main.R
@@ -24,6 +25,10 @@ import com.example.main.api.Result
 import com.example.main.api.SearchInterface
 import com.example.main.api.SearchService
 import com.example.main.databinding.FragmentDashboardBinding
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.checkerframework.checker.units.qual.K
 import retrofit2.Call
 import retrofit2.Callback
@@ -114,6 +119,7 @@ class DashboardFragment : Fragment() {
 
 
         dashboardViewModel.text.observe(viewLifecycleOwner) {
+            var searchJob:Job? = null
 
             if (!filmsLoaded && isAdded) {
                 buttonIdPairs.forEach { (button, id) ->
@@ -127,6 +133,11 @@ class DashboardFragment : Fragment() {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     if (isAdded) {
                         //binding?.progress?.visibility = View.VISIBLE
+                        searchJob?.cancel()
+                        searchJob=lifecycleScope.launch {
+                            delay(500)
+                        }
+
                         clearAllFilters()
                         searchResults(
                             searchList,searchbar,
@@ -135,6 +146,7 @@ class DashboardFragment : Fragment() {
                     }
 
                     if (!filmsLoaded && isAdded) {
+
                         buttonIdPairs.forEach { (button, id) ->
                             filterButton(button, id)
                         }
@@ -144,6 +156,13 @@ class DashboardFragment : Fragment() {
                 }
 
                 override fun onQueryTextChange(newText: String): Boolean {
+
+                    searchJob?.cancel()
+                    searchJob=lifecycleScope.launch {
+                        delay(500)
+                    }
+
+
                     val text = newText.lowercase(Locale.getDefault())
                     if (text.isNotEmpty()){
                         clearAllFilters()

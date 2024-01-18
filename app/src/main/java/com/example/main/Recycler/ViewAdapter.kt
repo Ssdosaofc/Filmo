@@ -55,7 +55,7 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        if (position != RecyclerView.NO_POSITION && position < films.size) {
+        //if (position != RecyclerView.NO_POSITION && position < films.size) {
             val film = films[position]
 
             holder.movieTitle.text = film.title
@@ -250,7 +250,9 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
                 }
             }
 
-        }
+            holder.bindingAdapter
+
+
     }
 
     private fun checkIfFavourite(holder: MovieViewHolder, movieID: String, position: Int) {
@@ -264,7 +266,7 @@ class ViewAdapter(val context: Context, var films: List<Result>): Adapter<ViewAd
                     if (position != RecyclerView.NO_POSITION && position < films.size) {
                         films[position].isFavorite = isInMyFavourite
                         updateFavoriteButton(holder, position)
-                        notifyItemChanged(position)
+                        //notifyItemChanged(position)
                     }
                 }
 
