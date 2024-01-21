@@ -52,7 +52,7 @@ class HomeFragment : Fragment() {
     private fun getPopularMovies(popularList: RecyclerView) {
 //https://juliensalvi.medium.com/safe-delay-in-android-views-goodbye-handlers-hello-coroutines-cd47f53f0fbf
 
-        val film = MovieService.movieInterface.getMovies("en-US", 1)
+        val film = MovieService.movieInterface.getMovies(1)
         film.enqueue(object : Callback<Data> {
             override fun onResponse(call: Call<Data>, response: Response<Data>) {
                 val context = context

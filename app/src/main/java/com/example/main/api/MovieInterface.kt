@@ -14,7 +14,7 @@ const val BASE_URL= "https://api.themoviedb.org/3/"
 interface MovieInterface {
 
     @GET("movie/popular?api_key=$API_KEY")
-    fun getMovies(@Query("language")language: String, @Query("page") page: Int): Call<Data>
+    fun getMovies(@Query("page") page: Int): Call<Data>
 }
 
 object MovieService{
